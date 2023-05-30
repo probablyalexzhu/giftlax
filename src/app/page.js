@@ -14,7 +14,7 @@ import { Container } from "@chakra-ui/react";
 
 // 1. Import the extendTheme function
 import { extendTheme } from "@chakra-ui/react";
-
+import { Spacer } from "@chakra-ui/react";
 // 2. Extend the theme to include custom colors, fonts, etc
 const colors = {
     // brand: {
@@ -28,15 +28,14 @@ export const theme = extendTheme({ colors });
 
 export default function Home() {
     return (
-        <Container centerContent>
-            <Box padding='80' bg='blue.400' color='black' maxW='md'>
-                <ChakraProvider theme={theme}>
-                    <Fragment>
-                        <GreenButton />
+        <ChakraProvider theme={theme}>
+            <Flex spacing="10" padding="20">  
+                    <GreenButton />
+                    <Spacer />
+                    <Box width="95%">  
                         <Accordion />
-                    </Fragment>
-                </ChakraProvider>
-            </Box>
-        </Container>
+                    </Box>
+            </Flex>
+        </ChakraProvider>
     );
 }

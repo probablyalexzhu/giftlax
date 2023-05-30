@@ -5,6 +5,7 @@ import {
     AccordionPanel,
     AccordionIcon,
     Box,
+    Button
 } from "@chakra-ui/react";
 
 import GreenButton from "./GreenButton.js";
@@ -30,7 +31,7 @@ function CustomAccordionItem(props) {
                         </Box>
                         <AccordionIcon />
                     </AccordionButton>
-                    <GreenButton />
+                    <GiftButton />
                 </h2>
                 <AccordionPanel pb={4}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
@@ -39,5 +40,11 @@ function CustomAccordionItem(props) {
                     ullamco laboris nisi ut aliquip ex ea commodo consequat.
                 </AccordionPanel>
             </AccordionItem>
+    )
+}
+
+function GiftButton() {
+    return (
+        <Button>Gifts</Button>
     )
 }
