@@ -17,6 +17,7 @@ import {
     ProfileButton,
     RegisterButton,
   } from "./components/buttons.component";
+import { User } from "./components/user.component";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../lib/auth";
 
@@ -27,7 +28,7 @@ const customTheme = {
 export const theme = extendTheme({ customTheme });
 
 export default async function Home() {
-    // const session = await getServerSession(authOptions);
+    // const session = await getServerSession(authOptions); // culprit
     // console.log(session);
 
     const current = new Date();
@@ -64,6 +65,10 @@ export default async function Home() {
             <RegisterButton />
             <LogoutButton />
             <ProfileButton />
+            {/* <h1>Server Session</h1>
+            <pre>{JSON.stringify(session)}</pre> */}
+            <User />
+            {/* end of auth code */}
             <Flex spacing="10" padding="20">
                 <GreenButton />
                 <Spacer />
