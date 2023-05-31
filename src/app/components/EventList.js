@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { CheckIcon } from "@chakra-ui/icons";
 import { FiGift } from "react-icons/fi";
+import EventModalButton from "./EventModal.js";
 
 export default function EventList() {
     return (
@@ -43,7 +44,7 @@ function EventItem(props) {
                 </Stack>
                 <HStack>
                     <GiftButton text={"Gifts"} />
-                    <TextButton text={"Edit"} />
+                    <EventModalButton />
                     <IconButton icon={<CheckIcon />} colorScheme='green' variant='outline'/>
                 </HStack>
             </Flex>
