@@ -2,7 +2,6 @@
 
 import GreenButton from "./components/GreenButton.js";
 import EventList from "./components/EventList.js";
-import { Fragment } from "react";
 import {
     ChakraProvider,
     Flex,
