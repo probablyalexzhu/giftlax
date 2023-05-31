@@ -33,9 +33,7 @@ export default async function Home() {
     return (
         <ChakraProvider theme={theme} padding="20">
             <LoginButton />
-            <RegisterButton />
             <LogoutButton />
-            <ProfileButton />
             <User />
         </ChakraProvider>
     );

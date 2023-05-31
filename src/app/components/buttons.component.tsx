@@ -4,31 +4,25 @@
 import { signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
+import {
+  ChakraProvider,
+  Flex,
+  Box,
+  extendTheme,
+  Stack,
+  Spacer,
+  Text,
+  Button,
+} from "@chakra-ui/react";
 
 export const LoginButton = () => {
   return (
-    <button style={{ marginRight: 10 }} onClick={() => signIn()}>
-      Sign in
-    </button>
-  );
-};
-
-export const RegisterButton = () => {
-  return (
-    <Link href="/register" style={{ marginRight: 10 }}>
-      Register
-    </Link>
+    <Button color='white' variant='link'onClick={() => signIn()}>Log In</Button>
   );
 };
 
 export const LogoutButton = () => {
   return (
-    <button style={{ marginRight: 10 }} onClick={() => signOut()}>
-      Sign Out
-    </button>
+    <Button color='white' variant='link'onClick={() => signOut()}>Log Out</Button>
   );
-};
-
-export const ProfileButton = () => {
-  return <Link href="/profile">Profile</Link>;
 };

@@ -11,10 +11,10 @@ import {
     Spacer,
     Text,
 } from "@chakra-ui/react";
-import { User } from "../components/user.component";
+import { User } from "../components/user.component.tsx";
 import { getServerSession } from "next-auth";
-import { redirect} from 'next/navigation'
-import { useSession } from 'next-auth/react'
+import { redirect } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const customTheme = {
     // extension of theme for future use
@@ -25,6 +25,14 @@ export const theme = extendTheme({ customTheme });
 export default async function Home() {
     // const session = await getServerSession(authOptions); // culprit
     // console.log(session);
+
+    // protect doc
+    const { data: session } = useSession({
+        required: true,
+        onUnauthenticated() {
+            redirect("/api/auth/callback/google?callbackUrl=/protected");
+        },
+    });
 
     const current = new Date();
     const weekday = [
