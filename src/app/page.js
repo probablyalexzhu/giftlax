@@ -14,7 +14,9 @@ import { Container } from "@chakra-ui/react";
 
 // 1. Import the extendTheme function
 import { extendTheme } from "@chakra-ui/react";
-import { Spacer } from "@chakra-ui/react";
+import { Spacer,
+    Text
+} from "@chakra-ui/react";
 // 2. Extend the theme to include custom colors, fonts, etc
 const colors = {
     // brand: {
@@ -28,13 +30,18 @@ export const theme = extendTheme({ colors });
 
 export default function Home() {
     const current = new Date();
-    
+    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    let day = weekday[current.getDay()];
+    const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    let monthName = month[current.getMonth()]
+    const date = `${day} ${monthName} ${current.getDate()}, ${current.getFullYear()}`;
     return (
-        <ChakraProvider theme={theme}>
+        <ChakraProvider theme={theme} padding="20">
             <Flex spacing="10" padding="20">  
                     <GreenButton />
                     <Spacer />
                     <Box width="95%">  
+                        <Text fontSize='2xl'><b>Today:</b> {date}</Text>
                         <Accordion />
                     </Box>
             </Flex>
