@@ -11,6 +11,14 @@ import {
     Spacer,
     Text,
 } from "@chakra-ui/react";
+import {
+    LoginButton,
+    LogoutButton,
+    ProfileButton,
+    RegisterButton,
+  } from "./components/buttons.component";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../lib/auth";
 
 const customTheme = {
     // extension of theme for future use
@@ -18,7 +26,10 @@ const customTheme = {
 
 export const theme = extendTheme({ customTheme });
 
-export default function Home() {
+export default async function Home() {
+    // const session = await getServerSession(authOptions);
+    // console.log(session);
+
     const current = new Date();
     const weekday = [
         "Sunday",
@@ -48,6 +59,11 @@ export default function Home() {
     const date = `${day} ${monthName} ${current.getDate()}, ${current.getFullYear()}`;
     return (
         <ChakraProvider theme={theme} padding="20">
+            {/* auth code */}
+            <LoginButton />
+            <RegisterButton />
+            <LogoutButton />
+            <ProfileButton />
             <Flex spacing="10" padding="20">
                 <GreenButton />
                 <Spacer />
