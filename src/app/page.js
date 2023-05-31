@@ -27,6 +27,8 @@ const colors = {
 export const theme = extendTheme({ colors });
 
 export default function Home() {
+    const current = new Date();
+    
     return (
         <ChakraProvider theme={theme}>
             <Flex spacing="10" padding="20">  
