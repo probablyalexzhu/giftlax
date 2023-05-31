@@ -1,4 +1,4 @@
-import { IconButton, ButtonGroup } from "@chakra-ui/react";
+import { IconButton } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 
 export default function GreenButton() {

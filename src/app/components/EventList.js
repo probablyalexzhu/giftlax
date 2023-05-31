@@ -1,5 +1,4 @@
 import {
-    Accordion,
     Button,
     Flex,
     HStack,
@@ -7,7 +6,9 @@ import {
     IconButton,
     Stack,
     Text,
-    Divider
+    Divider,
+    Progress,
+    Box
 } from "@chakra-ui/react";
 import { CheckIcon } from "@chakra-ui/icons";
 import { FiGift } from "react-icons/fi";
@@ -32,8 +33,13 @@ function EventItem(props) {
                     <Text fontSize="lg">
                         <b>Section {sectionNumber} title</b>
                     </Text>
-                    <Text>Section {sectionNumber} title</Text>
                     <Text>Gifts Prepared: </Text>
+                    <Box width='25%'>
+                        <Stack>
+                            <Text fontSize='sm'>Money spent: </Text>
+                            <Progress hasStripe colorScheme='green' value={64}/>
+                        </Stack>
+                    </Box>
                 </Stack>
                 <HStack>
                     <GiftButton text={"Gifts"} />
