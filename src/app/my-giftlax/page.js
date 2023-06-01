@@ -30,7 +30,7 @@ export default async function Home() {
     const { data: session } = useSession({
         required: true,
         onUnauthenticated() {
-            redirect("/api/auth/callback/google?callbackUrl=/protected");
+            redirect("/api/auth/callback/google?callbackUrl=/my-giftlax");
         },
     });
 

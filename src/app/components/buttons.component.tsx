@@ -13,17 +13,19 @@ import {
   Spacer,
   Text,
   Button,
+  Icon,
 } from "@chakra-ui/react";
+import { FiGift } from "react-icons/fi";
 
 export const LoginButton = () => {
   return (
-    <Button color='white' variant='link'onClick={() => signIn()}>Log In</Button>
+    <Button color='white' variant='link' size='lg' onClick={() => signIn()}>Log In</Button>
   );
 };
 
 export const LogoutButton = () => {
   return (
-    <Button color='white' variant='link'onClick={() => signOut()}>Log Out</Button>
+    <Button color='white' variant='link' size='lg' onClick={() => signOut()}>Log Out</Button>
   );
 };
 
@@ -42,3 +44,23 @@ export const LoginButton2 = (props) => {
   }
   
 };
+
+export const HomeButton = () => {
+    return (
+      <NextLink href='/' passHref>
+        <Button color='white' variant='link' size='lg' leftIcon=<CustomIcon/> >Home</Button>
+      </NextLink>
+    );
+};
+
+export const GiftlaxButton = () => {
+  return (
+    <NextLink href='/my-giftlax' passHref>
+      <Button color='white' colorScheme='orange' variant='solid' size='lg' >My Giftlax</Button>
+    </NextLink>
+  );
+};
+
+function CustomIcon() {
+  return <Icon as={FiGift} />;
+}

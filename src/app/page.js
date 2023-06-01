@@ -13,6 +13,7 @@ import {
     Heading,
     Center,
     HStack,
+    Divider,
 } from "@chakra-ui/react";
 import {
     LoginButton2,
@@ -43,17 +44,19 @@ export default async function Home() {
                     Never miss a gift-giving opportunity again
                 </Heading>
             </Center>
-            <Center mt="100px" color="black">
+            <Center mt="100px" mb="50px" color="black">
                 <Text fontSize="2xl">
                     with the simple site that effortlessly tracks all your
                     special occasions, gift ideas, and expenses, <b>Giftlax</b>.
                 </Text>
             </Center>
-            <Center mt="100px" color="black">
+            <Center>
+            <Divider width="70%"/>
+            </Center>
+            <Center mt="50px" color="black">
                 <HStack spacing='20'>
                     <User />
                 </HStack>
-                
             </Center>
         </ChakraProvider>
     );
