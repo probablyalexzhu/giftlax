@@ -10,18 +10,18 @@ import {
     Stack,
     Spacer,
     Text,
+    Heading,
+    Center,
+    HStack,
 } from "@chakra-ui/react";
 import {
-    LoginButton,
-    LogoutButton,
-    ProfileButton,
-    RegisterButton,
-  } from "./components/buttons.component";
+    LoginButton2,
+} from "./components/buttons.component";
 import { User } from "./components/user.component";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../lib/auth";
-import { redirect} from 'next/navigation'
-import { useSession } from 'next-auth/react'
+import { redirect } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const customTheme = {
     // extension of theme for future use
@@ -32,9 +32,29 @@ export const theme = extendTheme({ customTheme });
 export default async function Home() {
     return (
         <ChakraProvider theme={theme} padding="20">
-            <LoginButton />
-            <LogoutButton />
-            <User />
+            <Center mt="200px" color="black">
+                <Heading
+                    bgGradient="linear(to-l, teal.500, green.500)"
+                    bgClip="text"
+                    fontSize="6xl"
+                    fontWeight="extrabold"
+                    size="6xl"
+                >
+                    Never miss a gift-giving opportunity again
+                </Heading>
+            </Center>
+            <Center mt="100px" color="black">
+                <Text fontSize="2xl">
+                    with the simple site that effortlessly tracks all your
+                    special occasions, gift ideas, and expenses, <b>Giftlax</b>.
+                </Text>
+            </Center>
+            <Center mt="100px" color="black">
+                <HStack spacing='20'>
+                    <User />
+                </HStack>
+                
+            </Center>
         </ChakraProvider>
     );
 }
