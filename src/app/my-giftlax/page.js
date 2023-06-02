@@ -1,36 +1,52 @@
 "use client";
-
+import { useEffect } from 'react';
+import PocketBase from "pocketbase";
 import GreenButton from "../components/GreenButton.js";
 import EventList from "../components/EventList.js";
+import { User } from "../components/user.component"
 import {
     ChakraProvider,
     Flex,
     Box,
     extendTheme,
     Stack,
+    VStack,
     Spacer,
     Text,
+    Avatar,
 } from "@chakra-ui/react";
 import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
 
-const customTheme = {
-    // extension of theme for future use
-};
+export default async function Giftlax() {
+    // const session = await getServerSession(authOptions); // culprit: SSR
+    const pb = new PocketBase("http://127.0.0.1:8090");
 
-export const theme = extendTheme({ customTheme });
+    // protect doc and re-render on new data fetched
+    // CAUSES NOT TO RE-RENDER
+    // const { data: session } = useSession({
+    //     required: true,
+    //     onUnauthenticated() {
+    //         redirect("/api/auth/callback/google?callbackUrl=/my-giftlax");
+    //     },
+    // });
+    
+    // let email = "";
+    // let name = "";
+    // let imgLink = "";
+    // if (typeof session !== "undefined" && session != null) {
+    //     name = "react wake up pls";
+    //     console.log("REEE")
+    //     name = [...session.user.name];
+    //     imgLink = session.user.image.slice();
+    //     email = session.user.email.slice();
+    // }
 
-export default async function Home() {
-    // const session = await getServerSession(authOptions); // culprit
-    // console.log(session);
-
-    // protect doc
-    const { data: session } = useSession({
-        required: true,
-        onUnauthenticated() {
-            redirect("/api/auth/callback/google?callbackUrl=/my-giftlax");
-        },
-    });
+    // getFullList is DEFINITELY A FUTURE SECURITY ISSUE TO ADDRESS
+    // const records = await pb.collection('events').getFullList({
+    //     filter: `email="${ email }"`
+    // });
+    // const myJSON = JSON.stringify(records);
 
     const current = new Date();
     const weekday = [
@@ -59,8 +75,11 @@ export default async function Home() {
     ];
     let monthName = month[current.getMonth()];
     const date = `${day} ${monthName} ${current.getDate()}, ${current.getFullYear()}`;
+
     return (
-        <ChakraProvider theme={theme} padding="20">
+        <ChakraProvider padding="20">
+            {/* <Text>{myJSON}</Text> */}
+            <UserTing />
             <Flex spacing="10" padding="20">
                 <GreenButton />
                 <Spacer />
@@ -76,3 +95,28 @@ export default async function Home() {
         </ChakraProvider>
     );
 }
+
+export const UserTing = () => {
+    const { data: session } = useSession({
+        required: true,
+        onUnauthenticated() {
+            redirect("/api/auth/callback/google?callbackUrl=/my-giftlax");
+        },
+    });
+    console.log(session);
+    let name = "";
+    let imgLink = "";
+    if (typeof session !== "undefined" && session != null) {
+        name = session.user.name;
+        imgLink = session.user.image;
+    }
+    
+    return (
+        <ChakraProvider>
+            <Avatar bg="orange.400" size="xl" name={name} src={imgLink} />{" "}
+            <VStack spacing="20px">
+                <Text>Name: {name}</Text>
+            </VStack>
+        </ChakraProvider>
+    );
+};

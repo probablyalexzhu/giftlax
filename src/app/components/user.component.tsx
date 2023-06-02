@@ -7,13 +7,14 @@ import { LoginButton2 } from "./buttons.component";
 
 export const User = () => {
     const { data: session } = useSession();
-    // console.log(session);
+    console.log(session);
     let name = "";
     let imgLink = "";
     if (typeof session !== "undefined" && session != null) {
         name = session.user.name;
         imgLink = session.user.image;
     }
+    
     return (
         <ChakraProvider>
             <Avatar bg="orange.400" size="xl" name={name} src={imgLink} />{" "}
