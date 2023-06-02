@@ -11,14 +11,14 @@ import {
     FormControl,
     FormLabel,
     Input,
-    Checkbox
+    Checkbox,
 } from "@chakra-ui/react";
 import { useRef } from "react";
 
 export default function EventModalButton() {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const initialRef = useRef(null)
-    const finalRef = useRef(null)
+    const initialRef = useRef(null);
+    const finalRef = useRef(null);
     return (
         <>
             <Button size="md" onClick={onOpen}>
@@ -48,14 +48,18 @@ export default function EventModalButton() {
                                 type="date"
                             />
                         </FormControl>
-                        <Checkbox colorScheme="green" mt={4}>Recurs Annually</Checkbox>
+                        <Checkbox colorScheme="green" mt={4}>
+                            Recurs Annually
+                        </Checkbox>
                     </ModalBody>
 
                     <ModalFooter>
                         <Button colorScheme="green" mr={3} onClick={onClose}>
                             Save Entry
                         </Button>
-                        <Button variant="ghost" onClick={onClose}>Cancel</Button>
+                        <Button variant="ghost" onClick={onClose}>
+                            Cancel
+                        </Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>

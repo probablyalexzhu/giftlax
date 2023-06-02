@@ -13,15 +13,14 @@ import {
 import { CheckIcon } from "@chakra-ui/icons";
 import { FiGift } from "react-icons/fi";
 import EventModalButton from "./EventModal.js";
-import { useState, useEffect } from "react";
-import { useReward } from 'react-rewards';
+import { useReward } from "react-rewards";
 
 export default function EventList() {
     return (
         <div>
-            <EventItem sectionNumber={0} rewardId = "b1"/>
-            <EventItem sectionNumber={1} rewardId = "b2"/>
-            <EventItem sectionNumber={2} rewardId = "b3"/>
+            <EventItem sectionNumber={0} rewardId="b1" />
+            <EventItem sectionNumber={1} rewardId="b2" />
+            <EventItem sectionNumber={2} rewardId="b3" />
         </div>
     );
 }
@@ -30,7 +29,7 @@ function EventItem(props) {
     const sectionNumber = props.sectionNumber;
     const rewardId = props.rewardId;
     // console.log(rewardId);
-    const {reward, isAnimating} = useReward(rewardId, 'confetti');
+    const { reward, isAnimating } = useReward(rewardId, "confetti");
     return (
         <div>
             <Divider />

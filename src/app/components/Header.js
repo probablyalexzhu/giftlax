@@ -1,24 +1,12 @@
 "use client";
 
-import {
-    ChakraProvider,
-    Flex,
-    Box,
-    extendTheme,
-    Stack,
-    Spacer,
-    Text,
-    Button,
-    HStack,
-} from "@chakra-ui/react";
+import { ChakraProvider, Flex, Box, Spacer, HStack } from "@chakra-ui/react";
 import {
     GiftlaxButton,
     HomeButton,
     LoginButton,
     LogoutButton,
 } from "./buttons.component";
-import NextLink from 'next/link'
-import { Link } from '@chakra-ui/react'
 
 const Header = () => {
     return (
@@ -28,7 +16,7 @@ const Header = () => {
                     <HStack>
                         <HomeButton />
                     </HStack>
-                    <Spacer/>
+                    <Spacer />
                     <HStack spacing="40px">
                         <GiftlaxButton />
                         <LoginButton />

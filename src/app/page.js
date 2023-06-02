@@ -1,28 +1,15 @@
 "use client";
 
-import GreenButton from "./components/GreenButton.js";
-import EventList from "./components/EventList.js";
 import {
     ChakraProvider,
-    Flex,
-    Box,
     extendTheme,
-    Stack,
-    Spacer,
     Text,
     Heading,
     Center,
     HStack,
     Divider,
 } from "@chakra-ui/react";
-import {
-    LoginButton2,
-} from "./components/buttons.component";
 import { User } from "./components/user.component";
-import { getServerSession } from "next-auth";
-import { authOptions } from "../lib/auth";
-import { redirect } from "next/navigation";
-import { useSession } from "next-auth/react";
 
 const customTheme = {
     // extension of theme for future use
@@ -51,10 +38,10 @@ export default async function Home() {
                 </Text>
             </Center>
             <Center>
-            <Divider width="70%"/>
+                <Divider width="70%" />
             </Center>
             <Center mt="50px" color="black">
-                <HStack spacing='20'>
+                <HStack spacing="20">
                     <User />
                 </HStack>
             </Center>

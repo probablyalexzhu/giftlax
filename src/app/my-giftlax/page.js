@@ -11,8 +11,6 @@ import {
     Spacer,
     Text,
 } from "@chakra-ui/react";
-import { User } from "../components/user.component.tsx";
-import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
 
