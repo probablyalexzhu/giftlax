@@ -10,10 +10,11 @@ import {
     Box,
     extendTheme,
     Stack,
-    VStack,
+    HStack,
     Spacer,
     Text,
     Avatar,
+    VStack,
 } from "@chakra-ui/react";
 import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -79,24 +80,27 @@ export default async function Giftlax() {
     return (
         <ChakraProvider padding="20">
             {/* <Text>{myJSON}</Text> */}
-            <UserTing />
-            <Flex spacing="10" padding="20">
-                <GreenButton />
-                <Spacer />
-                <Box width="95%">
+            <HStack spacing="10" padding="20">
+                <Box width="100%">
                     <Stack spacing="20px">
-                        <Text fontSize="3xl">
-                            <b>Today:</b> {date}
-                        </Text>
+                        
+                        <HStack spacing="20">
+                            <Text fontSize="4xl">
+                                <b>Today:</b> {date}
+                            </Text>
+                            <Spacer />
+                            <UserBar />
+                            <GreenButton />
+                        </HStack>
                         <EventList />
                     </Stack>
                 </Box>
-            </Flex>
+            </HStack>
         </ChakraProvider>
     );
 }
 
-export const UserTing = () => {
+export const UserBar = () => {
     const { data: session } = useSession({
         required: true,
         onUnauthenticated() {
@@ -113,10 +117,10 @@ export const UserTing = () => {
     
     return (
         <ChakraProvider>
-            <Avatar bg="orange.400" size="xl" name={name} src={imgLink} />{" "}
-            <VStack spacing="20px">
-                <Text>Name: {name}</Text>
-            </VStack>
+            <HStack spacing="15px">
+                <Text fontSize="lg"><b>{name}</b></Text>
+                <Avatar bg="orange.400" size="sm" name={name} src={imgLink} />{" "}
+            </HStack>
         </ChakraProvider>
     );
 };
