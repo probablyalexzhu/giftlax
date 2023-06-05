@@ -15,16 +15,15 @@ import {
     Text,
     Avatar,
     VStack,
+    Skeleton,
+    Spinner,
 } from "@chakra-ui/react";
 import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 export default function Giftlax() {
-
-    // const [name, updateName] = useState("");
-    // const [imgLink, updateLink] = useState("");
-    // const [email, updateEmail] = useState("");
-
+    const [data, setData] = useState([]);
+    const [myJSON, setState] = useState("nothing yet");
     const { data: session, status } = useSession({
         required: true,
         onUnauthenticated() {
@@ -32,36 +31,21 @@ export default function Giftlax() {
         },
     });
 
-    // // event handler
-    // useEffect(() => {
-    //    if(status === "authenticated") {
-    //         console.log("authenticated!")
-    //         updateName(session.user.name);
-    //         updateLink(session.user.image);
-    //         updateEmail(session.user.email);
-    //     } else {
-    //         console.log("cry")
-    //     }
-    // });    
-
+    // when NextAuth session loads in, fetch from db using session email
     useEffect(() => {
         getDatabaseStuff();
     }, [session]);
-
-    const [myJSON, setState] = useState("nothing yet");
+    
     async function getDatabaseStuff() {
         const pb = new PocketBase("http://127.0.0.1:8090");
 
-        // getFullList is DEFINITELY A FUTURE SECURITY ISSUE TO ADDRESS
+        // this filter method could be made more secure in the future
         const records = await pb.collection('events').getFullList({
             filter: `email="${ session?.user?.email }"`
         });
         setState(JSON.stringify(records));
-
-        console.log("name: " + session?.user?.name);
-        console.log(myJSON);
+        setData(records);
     }
-    console.log("json in the wild: " + myJSON);
 
     const current = new Date();
     const weekday = [
@@ -92,12 +76,11 @@ export default function Giftlax() {
     const date = `${day} ${monthName} ${current.getDate()}, ${current.getFullYear()}`;
 
     // if(status === "loading") {
-    //     return <div>Loading</div>
+    //     return <div>Loading</div> // could add loading condition later
     // }
     return (
         <ChakraProvider padding="20">
-            <Text>me jsonny: {myJSON}</Text>
-            {/* <AsyncTest /> */}
+            {/* <Text>JSON string: {myJSON}</Text> */}
             <HStack spacing="10" padding="20">
                 <Box width="100%">
                     <Stack spacing="20px">
@@ -107,13 +90,25 @@ export default function Giftlax() {
                                 <b>Today:</b> {date}
                             </Text>
                             <Spacer />
-                            <UserBar
-                                name = {session?.user?.name}
-                                link = {session?.user?.image}
-                            />
+                            {status === "loading" ?
+                                (<Spinner/>)
+                                    : 
+                                (<UserBar
+                                    name = {session?.user?.name}
+                                    link = {session?.user?.image}
+                                />)
+                            }
                             <GreenButton />
                         </HStack>
-                        <EventList />
+                        {status === "loading" ?
+                            (<Stack spacing="30px" padding="5">
+                                <Skeleton height='150px' />
+                                <Skeleton height='150px' />
+                                <Skeleton height='150px' />
+                            </Stack>)
+                                 : 
+                            (<EventList data={data}/>)
+                        }
                     </Stack>
                 </Box>
             </HStack>
