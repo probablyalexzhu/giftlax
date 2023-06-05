@@ -19,23 +19,49 @@ import {
 import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
 
-export default async function Giftlax() {
-    const pb = new PocketBase("http://127.0.0.1:8090");
+export default function Giftlax() {
 
-    const [name, updateName] = useState("");
-    const [imgLink, updateLink] = useState("");
-    const [email, updateEmail] = useState("");
+    // const [name, updateName] = useState("");
+    // const [imgLink, updateLink] = useState("");
+    // const [email, updateEmail] = useState("");
 
-    const myJSON = "";
-    if(email != "") {
+    const { data: session, status } = useSession({
+        required: true,
+        onUnauthenticated() {
+            redirect("/api/auth/callback/google?callbackUrl=/my-giftlax");
+        },
+    });
+
+    // // event handler
+    // useEffect(() => {
+    //    if(status === "authenticated") {
+    //         console.log("authenticated!")
+    //         updateName(session.user.name);
+    //         updateLink(session.user.image);
+    //         updateEmail(session.user.email);
+    //     } else {
+    //         console.log("cry")
+    //     }
+    // });    
+
+    useEffect(() => {
+        getDatabaseStuff();
+    }, [session]);
+
+    const [myJSON, setState] = useState("nothing yet");
+    async function getDatabaseStuff() {
+        const pb = new PocketBase("http://127.0.0.1:8090");
+
         // getFullList is DEFINITELY A FUTURE SECURITY ISSUE TO ADDRESS
         const records = await pb.collection('events').getFullList({
-            filter: `email="${ email }"`
+            filter: `email="${ session?.user?.email }"`
         });
-        const myJSON = JSON.stringify(records);
-    }
+        setState(JSON.stringify(records));
 
-    console.log("name in parent:" + name);
+        console.log("name: " + session?.user?.name);
+        console.log(myJSON);
+    }
+    console.log("json in the wild: " + myJSON);
 
     const current = new Date();
     const weekday = [
@@ -65,9 +91,13 @@ export default async function Giftlax() {
     let monthName = month[current.getMonth()];
     const date = `${day} ${monthName} ${current.getDate()}, ${current.getFullYear()}`;
 
+    // if(status === "loading") {
+    //     return <div>Loading</div>
+    // }
     return (
         <ChakraProvider padding="20">
-            {/* <Text>{myJSON}</Text> */}
+            <Text>me jsonny: {myJSON}</Text>
+            {/* <AsyncTest /> */}
             <HStack spacing="10" padding="20">
                 <Box width="100%">
                     <Stack spacing="20px">
@@ -78,14 +108,8 @@ export default async function Giftlax() {
                             </Text>
                             <Spacer />
                             <UserBar
-                                updateName = {updateName}
-                                updateEmail = {updateEmail}
-                                updateLink = {updateLink}
-                            />
-                            <Text>FUCK { name } FUCK</Text>
-                            <UserBar2
-                                name = {name}
-                                link = {imgLink}
+                                name = {session?.user?.name}
+                                link = {session?.user?.image}
                             />
                             <GreenButton />
                         </HStack>
@@ -97,27 +121,7 @@ export default async function Giftlax() {
     );
 }
 
-export const UserBar = ({updateName, updateEmail, updateLink}) => {
-    const { data: session } = useSession({
-        required: true,
-        onUnauthenticated() {
-            redirect("/api/auth/callback/google?callbackUrl=/my-giftlax");
-        },
-    });
-    
-    // removes cannot update component while rendering different component warning
-    useEffect(() => {
-        if (typeof session !== "undefined" && session != null) {
-            updateName(session.user.name);
-            updateLink(session.user.image);
-            updateEmail(session.user.email);
-        }
-    });    
-    console.log(session);
-    return (<>💀</>);
-};
-
-export const UserBar2 = (props) => {
+export const UserBar = (props) => {
     return (
         <ChakraProvider>
             <HStack spacing="15px">
@@ -126,4 +130,4 @@ export const UserBar2 = (props) => {
             </HStack>
         </ChakraProvider>
     );
-}
+};
