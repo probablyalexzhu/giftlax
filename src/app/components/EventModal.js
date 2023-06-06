@@ -27,11 +27,11 @@ export default function EventModalButton() {
             <Modal isOpen={isOpen} onClose={onClose} size="xl">
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Edit Entry</ModalHeader>
+                    <ModalHeader>Edit Event</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
                         <FormControl>
-                            <FormLabel>Entry name</FormLabel>
+                            <FormLabel>Event name</FormLabel>
                             <Input ref={initialRef} placeholder="Name" />
                         </FormControl>
 
@@ -55,7 +55,7 @@ export default function EventModalButton() {
 
                     <ModalFooter>
                         <Button colorScheme="green" mr={3} onClick={onClose}>
-                            Save Entry
+                            Save Event
                         </Button>
                         <Button variant="ghost" onClick={onClose}>
                             Cancel

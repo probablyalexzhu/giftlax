@@ -17,9 +17,30 @@ import { useReward } from "react-rewards";
 
 export default function EventItem({ item }) {
     const eventName = item?.name;
-    const dateCreated = item?.created;
+    const date = item?.date;
+    const gifts = item?.gifts;
+    const month = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+    ];
+    const dateParts = date.split("-");
+    const monthString = dateParts[1].substr(0, 2);
+    const dayString = dateParts[2].substr(0, 2);
+    const yearString = dateParts[0].substr(0, 4);
+    let monthName = month[parseInt(monthString, 10)];
+    const dateString = `${monthName} ${parseInt(dayString, 10)}, ${yearString}`;
     // console.log(rewardId);
-    const { reward, isAnimating } = useReward(dateCreated, "confetti");
+    const { reward, isAnimating } = useReward(date, "confetti");
     return (
         <div>
             <Divider />
@@ -28,8 +49,8 @@ export default function EventItem({ item }) {
                     <Text fontSize="lg">
                         <b>Event Name: {eventName}</b>
                     </Text>
-                    <Text>Date Created: {dateCreated}</Text>
-                    <Text>Gifts Prepared: </Text>
+                    <Text>Date: {dateString}</Text>
+                    <Text>Gifts Prepared: {gifts}</Text>
                     <Box width="25%">
                         <Stack>
                             <Text fontSize="sm">Money spent: </Text>
@@ -48,9 +69,9 @@ export default function EventItem({ item }) {
                         icon={<CheckIcon />}
                         colorScheme="green"
                         variant="outline"
-                        id={dateCreated}
                         disabled={isAnimating}
                         onClick={reward}
+                        id={date} // tells confetti which button to appear at
                     />
                 </HStack>
             </Flex>

@@ -41,7 +41,8 @@ export default function Giftlax() {
         const pb = new PocketBase("http://127.0.0.1:8090");
         // this filter method could be made more secure in the future
         const records = await pb.collection('events').getFullList({
-            filter: `email="${ session?.user?.email }"`
+            filter: `email="${ session?.user?.email }"`,
+            sort: 'date',
         });
         setState(JSON.stringify(records));
         setData(records);
@@ -75,9 +76,6 @@ export default function Giftlax() {
     let monthName = month[current.getMonth()];
     const date = `${day} ${monthName} ${current.getDate()}, ${current.getFullYear()}`;
 
-    // if(status === "loading") {
-    //     return <div>Loading</div> // could add loading condition later
-    // }
     return (
         <ChakraProvider padding="20">
             {/* <Text>JSON string: {myJSON}</Text> */}
