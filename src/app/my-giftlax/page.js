@@ -37,8 +37,8 @@ export default function Giftlax() {
     }, [session]);
     
     async function getDatabaseStuff() {
-        const pb = new PocketBase("http://127.0.0.1:8090");
 
+        const pb = new PocketBase("http://127.0.0.1:8090");
         // this filter method could be made more secure in the future
         const records = await pb.collection('events').getFullList({
             filter: `email="${ session?.user?.email }"`
