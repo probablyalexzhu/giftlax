@@ -13,11 +13,10 @@ import {
     Input,
     Checkbox,
     Box,
-    Text,
     Tooltip,
     useToast,
 } from "@chakra-ui/react";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import { AddIcon } from "@chakra-ui/icons";
 import PocketBase from "pocketbase";
 export default function GreenButton(email) {

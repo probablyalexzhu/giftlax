@@ -3,18 +3,14 @@ import { useEffect, useState } from 'react';
 import PocketBase from "pocketbase";
 import GreenButton from "../components/GreenButton.js";
 import EventList from "../components/EventList.js";
-import { User } from "../components/user.component"
 import {
     ChakraProvider,
-    Flex,
     Box,
-    extendTheme,
     Stack,
     HStack,
     Spacer,
     Text,
     Avatar,
-    VStack,
     Skeleton,
     Spinner,
 } from "@chakra-ui/react";
