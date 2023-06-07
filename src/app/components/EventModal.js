@@ -19,6 +19,7 @@ export default function EventModalButton() {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const initialRef = useRef(null);
     const finalRef = useRef(null);
+    
     return (
         <>
             <Button size="md" onClick={onOpen}>

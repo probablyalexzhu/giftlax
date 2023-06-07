@@ -30,15 +30,14 @@ export default function Giftlax() {
             redirect("/api/auth/callback/google?callbackUrl=/my-giftlax");
         },
     });
-
+    const pb = new PocketBase("http://127.0.0.1:8090");
+    
     // when NextAuth session loads in, fetch from db using session email
     useEffect(() => {
-        getDatabaseStuff();
+        getDatabaseEvents();
     }, [session]);
     
-    async function getDatabaseStuff() {
-
-        const pb = new PocketBase("http://127.0.0.1:8090");
+    async function getDatabaseEvents() {
         // this filter method could be made more secure in the future
         const records = await pb.collection('events').getFullList({
             filter: `email="${ session?.user?.email }"`,
@@ -96,7 +95,7 @@ export default function Giftlax() {
                                     link = {session?.user?.image}
                                 />)
                             }
-                            <GreenButton />
+                            <GreenButton email={session?.user?.email}/>
                         </HStack>
                         {status === "loading" ?
                             (<Stack spacing="30px" padding="5">
