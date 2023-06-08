@@ -45,8 +45,8 @@ export default function GreenButton(email) {
 
     async function createDatabaseEvent(emailString, eventName, eventDate) {
         const pb = new PocketBase("http://127.0.0.1:8090");
-        console.log(eventDate);
-        // example create data
+        // console.log(eventDate);
+        // create data
         const data = {
             name: eventName,
             gifts: "test",

@@ -38,7 +38,7 @@ export default function EventItem({ item }) {
     const monthString = dateParts[1].substr(0, 2);
     const dayString = dateParts[2].substr(0, 2);
     const yearString = dateParts[0].substr(0, 4);
-    let monthName = month[parseInt(monthString, 10)];
+    let monthName = month[parseInt(monthString, 10) - 1];
     const dateString = `${monthName} ${parseInt(dayString, 10)}, ${yearString}`;
     // console.log(rewardId);
     const { reward, isAnimating } = useReward(date, "confetti");
@@ -88,11 +88,6 @@ function GiftButton(props) {
             {text}
         </Button>
     );
-}
-
-function TextButton(props) {
-    const { text } = props;
-    return <Button size="md">{text}</Button>;
 }
 
 function CustomIcon() {

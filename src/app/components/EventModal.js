@@ -15,6 +15,14 @@ import {
     Box,
     Tooltip,
     useToast,
+    Spacer,
+    AlertDialog,
+    AlertDialogBody,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogContent,
+    AlertDialogOverlay,
+    AlertDialogCloseButton,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import { EditIcon } from "@chakra-ui/icons";
@@ -45,7 +53,7 @@ export default function EventModalButton({ item }) {
 
     async function updateDatabaseEvent(eventName, eventDate) {
         const pb = new PocketBase("http://127.0.0.1:8090");
-        console.log(eventDate);
+        // console.log(eventDate);
         // example edit data
         const data = {
             name: eventName,
@@ -107,16 +115,18 @@ export default function EventModalButton({ item }) {
                     </ModalBody>
 
                     <ModalFooter>
-                        <Tooltip label="Required fields missing" isDisabled={!isNameError && !isDateError}>
+                        <DeleteAlertDialog item={item}/>
+                        <Spacer />
+                        <Tooltip
+                            label="Required fields missing"
+                            isDisabled={!isNameError && !isDateError}
+                        >
                             <Button
                                 isDisabled={isNameError || isDateError}
                                 colorScheme="green"
                                 mr={3}
                                 onClick={() =>
-                                    handleUpdate(
-                                        eventName,
-                                        eventDate
-                                    )
+                                    handleUpdate(eventName, eventDate)
                                 }
                             >
                                 Update Event
@@ -128,6 +138,67 @@ export default function EventModalButton({ item }) {
                     </ModalFooter>
                 </ModalContent>
             </Modal>
+        </>
+    );
+}
+
+function DeleteAlertDialog({ item }) {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const cancelRef = useRef();
+    const toast = useToast();
+    const recordId = item?.id;
+    
+    function handleDelete(recordId) {
+        toast({
+            title: "Event deleted.",
+            description: "We've deleted that event for you.",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+        });
+        onClose();
+        deleteDatabaseEvent(recordId);
+    }
+
+    async function deleteDatabaseEvent(recordId) {
+        const pb = new PocketBase("http://127.0.0.1:8090");
+        // console.log("delete item id: " + recordId);
+        // delete data
+        await pb.collection("events").delete(recordId);
+    }
+
+    return (
+        <>
+            <Button colorScheme="red" onClick={onOpen}>
+                Delete Event
+            </Button>
+
+            <AlertDialog
+                isOpen={isOpen}
+                leastDestructiveRef={cancelRef}
+                onClose={onClose}
+            >
+                <AlertDialogOverlay>
+                    <AlertDialogContent>
+                        <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                            Delete Event
+                        </AlertDialogHeader>
+
+                        <AlertDialogBody>
+                            Are you sure? You can't undo this action afterwards.
+                        </AlertDialogBody>
+
+                        <AlertDialogFooter>
+                            <Button ref={cancelRef} onClick={onClose}>
+                                Cancel
+                            </Button>
+                            <Button colorScheme="red" onClick={() => handleDelete(recordId)} ml={3}>
+                                Delete
+                            </Button>
+                        </AlertDialogFooter>
+                    </AlertDialogContent>
+                </AlertDialogOverlay>
+            </AlertDialog>
         </>
     );
 }

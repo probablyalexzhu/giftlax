@@ -18,6 +18,16 @@ import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 export default function Giftlax() {
+    
+    useEffect(() => {
+        // Anything in here is fired on component mount.
+        return () => {
+            // Anything in here is fired on component unmount.
+            console.log("bye")
+            pb.collection('events').unsubscribe('*');
+        }
+    }, [])
+
     const [data, setData] = useState([]);
     const [myJSON, setState] = useState("nothing yet");
     const { data: session, status } = useSession({
@@ -34,13 +44,27 @@ export default function Giftlax() {
     }, [session]);
     
     async function getDatabaseEvents() {
+        // for initial page opening
         // this filter method could be made more secure in the future
-        const records = await pb.collection('events').getFullList({
+        let records = await pb.collection('events').getFullList({
             filter: `email="${ session?.user?.email }"`,
             sort: 'date',
         });
         setState(JSON.stringify(records));
-        setData(records);
+        setData(records); 
+
+        // for live updates
+        pb.collection('events').subscribe('*', async function (e) {
+            console.log("update received");
+
+            // this filter method could be made more secure in the future
+            records = await pb.collection('events').getFullList({
+                filter: `email="${ session?.user?.email }"`,
+                sort: 'date',
+            });
+            setState(JSON.stringify(records));
+            setData(records); 
+        });
     }
 
     const current = new Date();
