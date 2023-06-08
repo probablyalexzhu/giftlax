@@ -110,7 +110,7 @@ export default function GreenButton(email) {
                     </ModalBody>
 
                     <ModalFooter>
-                        <Tooltip label="Required fields missing">
+                        <Tooltip label="Required fields missing" isDisabled={!isNameError && !isDateError}>
                             <Button
                                 isDisabled={isNameError || isDateError}
                                 colorScheme="green"

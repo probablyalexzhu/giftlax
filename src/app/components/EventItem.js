@@ -19,6 +19,7 @@ export default function EventItem({ item }) {
     const eventName = item?.name;
     const date = item?.date;
     const gifts = item?.gifts;
+    
     const month = [
         "January",
         "February",
@@ -64,9 +65,10 @@ export default function EventItem({ item }) {
                 </Stack>
                 <HStack>
                     <GiftButton text={"Gifts"} />
-                    <EventModalButton />
+                    <EventModalButton item={ item }/>
                     <IconButton
                         icon={<CheckIcon />}
+                        size="lg"
                         colorScheme="green"
                         variant="outline"
                         disabled={isAnimating}
