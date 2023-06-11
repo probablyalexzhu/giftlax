@@ -96,9 +96,9 @@ export default function Giftlax() {
     const date = `${day} ${monthName} ${current.getDate()}, ${current.getFullYear()}`;
 
     return (
-        <ChakraProvider padding="20">
+        <ChakraProvider>
             {/* <Text>JSON string: {myJSON}</Text> */}
-            <HStack spacing="10" padding="20">
+            <HStack spacing="10" ml="40" mr="40" mt="20" mb ="20">
                 <Box width="100%">
                     <Stack spacing="20px">
                         
