@@ -10,16 +10,16 @@ import {
     Progress,
     Box,
 } from "@chakra-ui/react";
-import { CheckIcon } from "@chakra-ui/icons";
-import { FiGift } from "react-icons/fi";
 import EventModalButton from "./EventModal.js";
 import { useReward } from "react-rewards";
+import GiftModal from "./GiftModal.js";
+import { CheckIcon } from "@chakra-ui/icons";
 
 export default function EventItem({ item }) {
     const eventName = item?.name;
     const date = item?.date;
     const gifts = item?.gifts;
-    
+
     const month = [
         "January",
         "February",
@@ -64,8 +64,8 @@ export default function EventItem({ item }) {
                     </Box>
                 </Stack>
                 <HStack>
-                    <GiftButton text={"Gifts"} />
-                    <EventModalButton item={ item }/>
+                    <GiftModal />
+                    <EventModalButton item={item} />
                     <IconButton
                         icon={<CheckIcon />}
                         size="lg"
@@ -79,17 +79,4 @@ export default function EventItem({ item }) {
             </Flex>
         </div>
     );
-}
-
-function GiftButton(props) {
-    const { text } = props;
-    return (
-        <Button size="lg" rightIcon=<CustomIcon />>
-            {text}
-        </Button>
-    );
-}
-
-function CustomIcon() {
-    return <Icon as={FiGift} />;
 }
