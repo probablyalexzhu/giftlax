@@ -48,6 +48,7 @@ export default function GiftModal() {
                         <ModalHeader>Gifts</ModalHeader>
                         <ModalCloseButton />
                         <ModalBody>
+                            {/* editables */}
                             <FormControl>
                                 <FormLabel>Gift List</FormLabel>
                                 <Input
@@ -65,14 +66,14 @@ export default function GiftModal() {
                             </Box>
                             <FormLabel mt={4}>GiftGen</FormLabel>
                             <div style={{width: '1400px', height: '800px', overflow: 'hidden'}}>
-                                <iframe
+                                {/* <iframe
                                     src="https://www.giftgen.co.uk/"
                                     title="iframe Example 1"
                                     scrolling="no"
                                     height = "800px"
                                     width = "1000px"
                                     style={{marginLeft: '-60px', marginTop: '-60px'}}
-                                ></iframe>
+                                ></iframe> */}
                             </div>
                         </ModalBody>
 
