@@ -51,19 +51,7 @@ export default function GiftModal({ item }) {
                         <FormLabel>Gift List</FormLabel>
                         <EditableTextInput item={item}/>
                     </ModalBody>
-
-                    <ModalFooter>
-                        <Button
-                            colorScheme="green"
-                            mr={3}
-                            onClick={onClose}
-                        >
-                            Update Gifts
-                        </Button>
-                        <Button variant="ghost" onClick={onClose}>
-                            Cancel
-                        </Button>
-                    </ModalFooter>
+                    <ModalFooter/>
                 </ModalContent>
             </Modal>
         </>

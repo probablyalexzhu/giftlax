@@ -57,7 +57,6 @@ export default function EventModalButton({ item }) {
         // example edit data
         const data = {
             name: eventName,
-            gifts: "test",
             date: eventDate,
         };
         const record = await pb.collection("events").update(recordId, data);
