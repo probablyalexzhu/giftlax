@@ -29,8 +29,9 @@ import {
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import { FiGift } from "react-icons/fi";
+import EditableTextInput from "./Editable.js"
 
-export default function GiftModal() {
+export default function GiftModal({ item }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [gifts, setGifts] = useState("");
     const handleGiftChange = (event) => setGifts(event.target.value);
@@ -41,55 +42,28 @@ export default function GiftModal() {
                 Gifts
             </Button>
 
-            <Modal isOpen={isOpen} onClose={onClose} size="full">
+            <Modal isOpen={isOpen} onClose={onClose} size="3xl">
                 <ModalOverlay />
                 <ModalContent>
-                    <Box ml="40" mr="40" mt="20" mb="20">
-                        <ModalHeader>Gifts</ModalHeader>
-                        <ModalCloseButton />
-                        <ModalBody>
-                            {/* editables */}
-                            <FormControl>
-                                <FormLabel>Gift List</FormLabel>
-                                <Input
-                                    placeholder="Gift List"
-                                    value={gifts}
-                                    onChange={handleGiftChange}
-                                />
-                            </FormControl>
-                            <Box>
-                                <FormLabel mt={4}>Idea List</FormLabel>
-                                <Textarea
-                                    size="lg"
-                                    placeholder="Here is a sample placeholder"
-                                />
-                            </Box>
-                            <FormLabel mt={4}>GiftGen</FormLabel>
-                            <div style={{width: '1400px', height: '800px', overflow: 'hidden'}}>
-                                {/* <iframe
-                                    src="https://www.giftgen.co.uk/"
-                                    title="iframe Example 1"
-                                    scrolling="no"
-                                    height = "800px"
-                                    width = "1000px"
-                                    style={{marginLeft: '-60px', marginTop: '-60px'}}
-                                ></iframe> */}
-                            </div>
-                        </ModalBody>
+                    <ModalHeader>Gifts</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                        <FormLabel>Gift List</FormLabel>
+                        <EditableTextInput item={item}/>
+                    </ModalBody>
 
-                        <ModalFooter>
-                            <Button
-                                colorScheme="green"
-                                mr={3}
-                                onClick={onClose}
-                            >
-                                Update Gifts
-                            </Button>
-                            <Button variant="ghost" onClick={onClose}>
-                                Cancel
-                            </Button>
-                        </ModalFooter>
-                    </Box>
+                    <ModalFooter>
+                        <Button
+                            colorScheme="green"
+                            mr={3}
+                            onClick={onClose}
+                        >
+                            Update Gifts
+                        </Button>
+                        <Button variant="ghost" onClick={onClose}>
+                            Cancel
+                        </Button>
+                    </ModalFooter>
                 </ModalContent>
             </Modal>
         </>

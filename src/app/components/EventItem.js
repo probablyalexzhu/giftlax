@@ -51,7 +51,7 @@ export default function EventItem({ item }) {
                         <b>Event Name: {eventName}</b>
                     </Text>
                     <Text>Date: {dateString}</Text>
-                    <Text>Gifts Prepared: {gifts}</Text>
+                    <Text>Gift List: {gifts}</Text>
                     <Box width="25%">
                         <Stack>
                             <Text fontSize="sm">Money spent: </Text>
@@ -64,7 +64,7 @@ export default function EventItem({ item }) {
                     </Box>
                 </Stack>
                 <HStack>
-                    <GiftModal />
+                    <GiftModal item={item}/>
                     <EventModalButton item={item} />
                     <IconButton
                         icon={<CheckIcon />}
