@@ -14,13 +14,15 @@ import EventModalButton from "./EventModal.js";
 import { useReward } from "react-rewards";
 import GiftModal from "./GiftModal.js";
 import { CheckIcon } from "@chakra-ui/icons";
+import PocketBase from "pocketbase";
 
 export default function EventItem({ item }) {
     const eventName = item?.name;
     const date = item?.date;
     const gifts = item?.gifts;
     const notes = item?.notes;
-
+    const recordId = item?.id.toString();
+    
     const month = [
         "January",
         "February",
@@ -42,7 +44,7 @@ export default function EventItem({ item }) {
     let monthName = month[parseInt(monthString, 10) - 1];
     const dateString = `${monthName} ${parseInt(dayString, 10)}, ${yearString}`;
     // console.log(rewardId);
-    const { reward, isAnimating } = useReward(date, "confetti");
+
     return (
         <div>
             <Divider />
@@ -66,19 +68,54 @@ export default function EventItem({ item }) {
                     </Box>
                 </Stack>
                 <HStack>
-                    <GiftModal item={item}/>
+                    <GiftModal item={item} />
                     <EventModalButton item={item} />
-                    <IconButton
-                        icon={<CheckIcon />}
-                        size="lg"
-                        colorScheme="green"
-                        variant="outline"
-                        disabled={isAnimating}
-                        onClick={reward}
-                        id={date} // tells confetti which button to appear at
-                    />
+                    <CompleteButton recordId={recordId}/>
                 </HStack>
             </Flex>
         </div>
+    );
+}
+
+function CompleteButton({ recordId }) {
+    const { reward, isAnimating } = useReward(recordId, "confetti");
+
+    function handleComplete() {
+        // toast({
+        //     title: "Event updated.",
+        //     description: "We've updated that event for you.",
+        //     status: "success",
+        //     duration: 5000,
+        //     isClosable: true,
+        // });
+
+        reward();
+        setTimeout(() => {
+            updateDatabaseCompletion();
+          }, 3000);
+    }
+
+    async function updateDatabaseCompletion() {
+        const pb = new PocketBase("http://127.0.0.1:8090");
+        // console.log(eventDate);
+        console.log(recordId.toString());
+        // edit data
+        const data = {
+            "completed": true,
+        };
+        const record = await pb.collection("events").update(recordId, data);
+        console.log("bazinga");
+    }
+
+    return (
+    <IconButton
+        icon={<CheckIcon />}
+        size="lg"
+        colorScheme="green"
+        variant="outline"
+        disabled={isAnimating}
+        onClick={handleComplete}
+        id={recordId}
+    />
     );
 }
