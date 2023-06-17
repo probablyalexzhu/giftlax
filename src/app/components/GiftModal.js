@@ -29,16 +29,19 @@ import {
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import { FiGift } from "react-icons/fi";
-import EditableTextInput from "./Editable.js"
+import GiftListInput from "./GiftListInput.js"
+import NotesInput from "./NotesInput.js"
 import PocketBase from "pocketbase";
 
 export default function GiftModal({ item }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [eventList, setList] = useState(item?.gifts);
     const handleListChange = (event) => setList(event.target.value);
+    const [eventNotes, setNotes] = useState(item?.notes);
+    const handleNotesChange = (event) => setNotes(event.target.value);
     const recordId = item?.id;
 
-    function handleUpdate(eventList) {
+    function handleUpdate(eventList, eventNotes) {
         // toast({
         //     title: "Event updated.",
         //     description: "We've updated that event for you.",
@@ -47,16 +50,18 @@ export default function GiftModal({ item }) {
         //     isClosable: true,
         // });
         onClose();
-        updateDatabaseEvent(eventList);
+        updateDatabaseEvent(eventList, eventNotes);
     }
 
-    async function updateDatabaseEvent(eventList) {
+    async function updateDatabaseEvent(eventList, eventNotes) {
         console.log(eventList);
+        console.log(eventNotes);
         const pb = new PocketBase("http://127.0.0.1:8090");
         // console.log(eventDate);
         // edit data
         const data = {
             gifts: eventList,
+            notes: eventNotes,
         };
         const record = await pb.collection("events").update(recordId, data);
         console.log("bazinga")
@@ -75,14 +80,17 @@ export default function GiftModal({ item }) {
                     <ModalCloseButton />
                     <ModalBody>
                         <FormLabel>Gift List</FormLabel>
-                        <EditableTextInput item={item} eventList={eventList} handleListChange={handleListChange}/>
+                        <GiftListInput item={item} eventList={eventList} handleListChange={handleListChange}/>
+
+                        <FormLabel mt={4}>Notes</FormLabel>
+                        <NotesInput item={item} eventNotes={eventNotes} handleNotesChange={handleNotesChange}/>
                     </ModalBody>
                     <ModalFooter>
                             <Button
                                 colorScheme="green"
                                 mr={3}
                                 onClick={() =>
-                                    handleUpdate(eventList)
+                                    handleUpdate(eventList, eventNotes)
                                 }
                             >
                                 Update Gifts

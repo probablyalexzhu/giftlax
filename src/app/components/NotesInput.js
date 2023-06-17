@@ -13,10 +13,12 @@ import {
 import { CheckIcon, EditIcon, CloseIcon } from "@chakra-ui/icons";
 import { useRef, useState } from "react";
 
-export default function EditableTextInput({ item, eventList, handleListChange }) {
+export default function NotesInput({ item, eventNotes, handleNotesChange }) {
 
     /* Here's a custom control */
     function EditableControls() {
+        console.log(eventNotes);
+        
         const {
             isEditing,
             getSubmitButtonProps,
@@ -47,7 +49,7 @@ export default function EditableTextInput({ item, eventList, handleListChange })
     return (
         <Editable
             textAlign="left"
-            defaultValue={item?.gifts}
+            defaultValue={item?.notes}
             fontSize="2xl"
             isPreviewFocusable={false}
         >
@@ -55,8 +57,8 @@ export default function EditableTextInput({ item, eventList, handleListChange })
             {/* Here is the custom input */}
             <Input
                 as={EditableInput}
-                value={eventList}
-                onChange={handleListChange}
+                value={eventNotes}
+                onChange={handleNotesChange}
             />
             <EditableControls />
         </Editable>

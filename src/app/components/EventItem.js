@@ -19,6 +19,7 @@ export default function EventItem({ item }) {
     const eventName = item?.name;
     const date = item?.date;
     const gifts = item?.gifts;
+    const notes = item?.notes;
 
     const month = [
         "January",
@@ -48,10 +49,11 @@ export default function EventItem({ item }) {
             <Flex spacing="10" padding="5">
                 <Stack as="span" flex="1" textAlign="left">
                     <Text fontSize="lg">
-                        <b>Event Name: {eventName}</b>
+                        Event Name: <b>{eventName}</b>
                     </Text>
                     <Text>Date: {dateString}</Text>
                     <Text>Gift List: {gifts}</Text>
+                    <Text>Notes: {notes}</Text>
                     <Box width="25%">
                         <Stack>
                             <Text fontSize="sm">Money spent: </Text>

@@ -119,9 +119,9 @@ export default function Giftlax() {
                         </HStack>
                         {status === "loading" ?
                             (<Stack spacing="30px" padding="5">
-                                <Skeleton height='150px' />
-                                <Skeleton height='150px' />
-                                <Skeleton height='150px' />
+                                <Skeleton height='180px' />
+                                <Skeleton height='180px' />
+                                <Skeleton height='180px' />
                             </Stack>)
                                  : 
                             (<EventList data={data}/>)
