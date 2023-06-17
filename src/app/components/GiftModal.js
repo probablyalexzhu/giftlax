@@ -30,11 +30,37 @@ import {
 import { useRef, useState } from "react";
 import { FiGift } from "react-icons/fi";
 import EditableTextInput from "./Editable.js"
+import PocketBase from "pocketbase";
 
 export default function GiftModal({ item }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [gifts, setGifts] = useState("");
-    const handleGiftChange = (event) => setGifts(event.target.value);
+    const [eventList, setList] = useState(item?.gifts);
+    const handleListChange = (event) => setList(event.target.value);
+    const recordId = item?.id;
+
+    function handleUpdate(eventList) {
+        // toast({
+        //     title: "Event updated.",
+        //     description: "We've updated that event for you.",
+        //     status: "success",
+        //     duration: 5000,
+        //     isClosable: true,
+        // });
+        onClose();
+        updateDatabaseEvent(eventList);
+    }
+
+    async function updateDatabaseEvent(eventList) {
+        console.log(eventList);
+        const pb = new PocketBase("http://127.0.0.1:8090");
+        // console.log(eventDate);
+        // edit data
+        const data = {
+            gifts: eventList,
+        };
+        const record = await pb.collection("events").update(recordId, data);
+        console.log("bazinga")
+    }
 
     return (
         <>
@@ -49,9 +75,22 @@ export default function GiftModal({ item }) {
                     <ModalCloseButton />
                     <ModalBody>
                         <FormLabel>Gift List</FormLabel>
-                        <EditableTextInput item={item}/>
+                        <EditableTextInput item={item} eventList={eventList} handleListChange={handleListChange}/>
                     </ModalBody>
-                    <ModalFooter/>
+                    <ModalFooter>
+                            <Button
+                                colorScheme="green"
+                                mr={3}
+                                onClick={() =>
+                                    handleUpdate(eventList)
+                                }
+                            >
+                                Update Gifts
+                            </Button>
+                        <Button variant="ghost" onClick={onClose}>
+                            Cancel
+                        </Button>
+                    </ModalFooter>
                 </ModalContent>
             </Modal>
         </>
