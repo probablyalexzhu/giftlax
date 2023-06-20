@@ -1,20 +1,16 @@
 import {
     Editable,
     EditableInput,
-    EditableTextarea,
     EditablePreview,
     IconButton,
     Input,
     useEditableControls,
     Flex,
     ButtonGroup,
-    Button
 } from "@chakra-ui/react";
 import { CheckIcon, EditIcon, CloseIcon } from "@chakra-ui/icons";
-import { useRef, useState } from "react";
 
 export default function GiftListInput({ item, eventList, handleListChange }) {
-
     /* Here's a custom control */
     function EditableControls() {
         const {

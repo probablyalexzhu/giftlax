@@ -2,8 +2,6 @@ import {
     Button,
     Flex,
     HStack,
-    Icon,
-    IconButton,
     Stack,
     Text,
     Divider,
@@ -23,7 +21,7 @@ export default function EventItem({ item, isComplete }) {
     const gifts = item?.gifts;
     const notes = item?.notes;
     const recordId = item?.id.toString();
-    
+
     const month = [
         "January",
         "February",
@@ -45,9 +43,9 @@ export default function EventItem({ item, isComplete }) {
     let monthName = month[parseInt(monthString, 10) - 1];
     const dateString = `${monthName} ${parseInt(dayString, 10)}, ${yearString}`;
     // console.log(rewardId);
-    let bg="white";
-    if(isComplete) {
-        bg = "green.50"
+    let bg = "white";
+    if (isComplete) {
+        bg = "green.50";
     }
 
     return (
@@ -75,7 +73,10 @@ export default function EventItem({ item, isComplete }) {
                 <HStack>
                     <GiftModal item={item} />
                     <EventModalButton item={item} />
-                    <CompleteButton recordId={recordId} isComplete={isComplete}/>
+                    <CompleteButton
+                        recordId={recordId}
+                        isComplete={isComplete}
+                    />
                 </HStack>
             </Flex>
         </div>
@@ -87,7 +88,7 @@ function CompleteButton({ recordId, isComplete }) {
     const toast = useToast();
 
     function handleComplete() {
-        if(!isComplete) {
+        if (!isComplete) {
             toast({
                 title: "Event completed!",
                 description: "We've completed that event for you.",
@@ -107,44 +108,47 @@ function CompleteButton({ recordId, isComplete }) {
         }
         setTimeout(() => {
             updateDatabaseCompletion();
-          }, 3000);
+        }, 3000);
     }
 
     async function updateDatabaseCompletion() {
         const pb = new PocketBase("http://127.0.0.1:8090");
         // console.log(eventDate);
         console.log(recordId.toString());
-        let data = { "completed": true};
+        let data = { completed: true };
         // edit data
-        if(isComplete) {
+        if (isComplete) {
             data = {
-                "completed": false,
+                completed: false,
             };
         }
         const record = await pb.collection("events").update(recordId, data);
         console.log("bazinga");
     }
 
-    return (
-        isComplete ?
-            <Button
-                rightIcon={<CloseIcon />}
-                size="lg"
-                colorScheme="red"
-                variant="solid"
-                disabled={isAnimating}
-                onClick={handleComplete}
-                id={recordId}
-            >Mark Uncompleted</Button>
-            :
-            <Button
-                rightIcon={<CheckIcon />}
-                size="lg"
-                colorScheme="green"
-                variant="outline"
-                disabled={isAnimating}
-                onClick={handleComplete}
-                id={recordId}
-            >Mark Completed</Button>
+    return isComplete ? (
+        <Button
+            rightIcon={<CloseIcon />}
+            size="lg"
+            colorScheme="red"
+            variant="solid"
+            disabled={isAnimating}
+            onClick={handleComplete}
+            id={recordId}
+        >
+            Mark Uncompleted
+        </Button>
+    ) : (
+        <Button
+            rightIcon={<CheckIcon />}
+            size="lg"
+            colorScheme="green"
+            variant="outline"
+            disabled={isAnimating}
+            onClick={handleComplete}
+            id={recordId}
+        >
+            Mark Completed
+        </Button>
     );
 }

@@ -22,7 +22,6 @@ import {
     AlertDialogHeader,
     AlertDialogContent,
     AlertDialogOverlay,
-    AlertDialogCloseButton,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import { EditIcon } from "@chakra-ui/icons";
@@ -114,7 +113,7 @@ export default function EventModalButton({ item }) {
                     </ModalBody>
 
                     <ModalFooter>
-                        <DeleteAlertDialog item={item}/>
+                        <DeleteAlertDialog item={item} />
                         <Spacer />
                         <Tooltip
                             label="Required fields missing"
@@ -146,7 +145,7 @@ function DeleteAlertDialog({ item }) {
     const cancelRef = useRef();
     const toast = useToast();
     const recordId = item?.id;
-    
+
     function handleDelete(recordId) {
         toast({
             title: "Event deleted.",
@@ -191,7 +190,11 @@ function DeleteAlertDialog({ item }) {
                             <Button ref={cancelRef} onClick={onClose}>
                                 Cancel
                             </Button>
-                            <Button colorScheme="red" onClick={() => handleDelete(recordId)} ml={3}>
+                            <Button
+                                colorScheme="red"
+                                onClick={() => handleDelete(recordId)}
+                                ml={3}
+                            >
                                 Delete
                             </Button>
                         </AlertDialogFooter>

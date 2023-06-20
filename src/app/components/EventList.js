@@ -3,7 +3,7 @@ import EventItem from "./EventItem.js";
 
 export default function EventList({ data }) {
     return (
-        <Tabs variant="soft-rounded" colorScheme="orange">
+        <Tabs variant="enclosed-colored" colorScheme="orange">
             <TabList>
                 <Tab>Pending</Tab>
                 <Tab>Completed</Tab>
@@ -11,24 +11,36 @@ export default function EventList({ data }) {
             <TabPanels>
                 <TabPanel>
                     <div>
-                        {data.map((item) => (
+                        {data.map((item) =>
                             // just add a key for no warning
-                            item?.completed == false ?
-                                <EventItem key={item?.id} item={item} isComplete={false}/>
-                            :
-                            <div></div>
-                        ))}
+                            item?.completed == false ? (
+                                <EventItem
+                                    key={item?.id}
+                                    item={item}
+                                    isComplete={false}
+                                />
+                            ) : (
+                                <div></div>
+                            )
+                        )}
                     </div>
                 </TabPanel>
                 <TabPanel>
                     <div>
-                        {data.toReversed().map((item) => ( // reverse for completed
-                            // just add a key for no warning
-                            item?.completed == true ?
-                                <EventItem key={item?.id} item={item} isComplete={true}/>
-                            :
-                            <div></div>
-                        ))}
+                        {data.toReversed().map(
+                            (
+                                item // reverse for completed
+                            ) =>
+                                item?.completed == true ? (
+                                    <EventItem
+                                        key={item?.id}
+                                        item={item}
+                                        isComplete={true}
+                                    />
+                                ) : (
+                                    <div></div>
+                                )
+                        )}
                     </div>
                 </TabPanel>
             </TabPanels>

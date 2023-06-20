@@ -1,24 +1,21 @@
 import {
     Editable,
     EditableInput,
-    EditableTextarea,
     EditablePreview,
     IconButton,
     Input,
     useEditableControls,
     Flex,
     ButtonGroup,
-    Button
 } from "@chakra-ui/react";
 import { CheckIcon, EditIcon, CloseIcon } from "@chakra-ui/icons";
 import { useRef, useState } from "react";
 
 export default function NotesInput({ item, eventNotes, handleNotesChange }) {
-
     /* Here's a custom control */
     function EditableControls() {
         console.log(eventNotes);
-        
+
         const {
             isEditing,
             getSubmitButtonProps,
