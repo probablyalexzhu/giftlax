@@ -9,7 +9,7 @@ import {
     Box,
     useToast,
 } from "@chakra-ui/react";
-import EventModalButton from "./EventModal.js";
+import EventModalButton from "./EditModal.js";
 import { useReward } from "react-rewards";
 import GiftModal from "./GiftModal.js";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
@@ -64,7 +64,7 @@ export default function EventItem({ item, isComplete }) {
                     <Text>Date: {dateString}</Text>
                     <Text>Gift List: {gifts}</Text>
                     <Text>Notes: {notes}</Text>
-                    <Box width="25%">
+                    <Box width="35%">
                         <Stack>
                             {budget != 0 ? (
                                 <div>

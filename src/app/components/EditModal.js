@@ -26,16 +26,16 @@ import {
 import { useRef, useState } from "react";
 import { EditIcon } from "@chakra-ui/icons";
 import PocketBase from "pocketbase";
-export default function EventModalButton({ item }) {
+export default function EditModalButton({ item }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const initialRef = useRef(null);
     const finalRef = useRef(null);
 
-    const [eventName, setName] = useState("");
+    const [eventName, setName] = useState(item?.name);
     const handleNameChange = (event) => setName(event.target.value);
     const [eventBudget, setBudget] = useState(0);
     const handleBudgetChange = (event) => setBudget(event.target.value);
-    const [eventDate, setDate] = useState("");
+    const [eventDate, setDate] = useState(item?.date.substring(0, item?.date.indexOf(' ')));
     const handleDateChange = (event) => setDate(event.target.value);
     const toast = useToast();
     const recordId = item?.id;
@@ -104,7 +104,7 @@ export default function EventModalButton({ item }) {
                         </FormControl>
 
                         <FormControl mt={4} isRequired isInvalid={isDateError}>
-                            <FormLabel>Date</FormLabel>
+                            <FormLabel>Date {eventDate}</FormLabel>
                             <Input
                                 placeholder="Select Date"
                                 size="md"

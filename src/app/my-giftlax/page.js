@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import PocketBase from "pocketbase";
-import GreenButton from "../components/GreenButton.js";
+import NewModal from "../components/NewModal.js";
 import EventList from "../components/EventList.js";
 import {
     ChakraProvider,
@@ -112,7 +112,7 @@ export default function Giftlax() {
                                     link={session?.user?.image}
                                 />
                             )}
-                            <GreenButton email={session?.user?.email} />
+                            <NewModal email={session?.user?.email} />
                         </HStack>
                         {status === "loading" ? (
                             <Stack spacing="30px" padding="5">
