@@ -45,7 +45,7 @@ export default function EditModalButton({ item }) {
             title: "Event updated.",
             description: "We've updated that event for you.",
             status: "success",
-            duration: 5000,
+            duration: 3000,
             isClosable: true,
         });
         onClose();
@@ -73,7 +73,7 @@ export default function EditModalButton({ item }) {
                 <Button
                     size="lg"
                     rightIcon={<EditIcon />}
-                    aria-label="New Event"
+                    aria-label="Edit"
                     onClick={onOpen}
                 >
                     Edit
@@ -104,7 +104,7 @@ export default function EditModalButton({ item }) {
                         </FormControl>
 
                         <FormControl mt={4} isRequired isInvalid={isDateError}>
-                            <FormLabel>Date {eventDate}</FormLabel>
+                            <FormLabel>Date</FormLabel>
                             <Input
                                 placeholder="Select Date"
                                 size="md"
@@ -113,9 +113,9 @@ export default function EditModalButton({ item }) {
                                 onChange={handleDateChange}
                             />
                         </FormControl>
-                        <Checkbox colorScheme="green" mt={4}>
+                        {/* <Checkbox colorScheme="green" mt={4}>
                             Recurs Annually
-                        </Checkbox>
+                        </Checkbox> */}
                     </ModalBody>
 
                     <ModalFooter>
@@ -157,7 +157,7 @@ function DeleteAlertDialog({ item }) {
             title: "Event deleted.",
             description: "We've deleted that event for you.",
             status: "success",
-            duration: 5000,
+            duration: 3000,
             isClosable: true,
         });
         onClose();

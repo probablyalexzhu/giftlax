@@ -3,8 +3,10 @@ import { NextAuthProvider } from "./providers";
 import React from "react";
 import Header from "./components/Header";
 
-// shared between pages
-const inter = Inter({ subsets: ["latin"] });
+// shared between pages; causes preload error
+const inter = Inter({
+    subsets: ["latin"],
+});
 
 export const metadata = {
     title: "Giftlax",

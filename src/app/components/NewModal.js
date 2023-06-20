@@ -38,7 +38,7 @@ export default function GreenButton(email) {
             title: "Event added.",
             description: "We've added that event for you.",
             status: "success",
-            duration: 5000,
+            duration: 3000,
             isClosable: true,
         });
         onClose();
@@ -111,9 +111,9 @@ export default function GreenButton(email) {
                                 onChange={handleDateChange}
                             />
                         </FormControl>
-                        <Checkbox colorScheme="green" mt={4}>
+                        {/* <Checkbox colorScheme="green" mt={4}>
                             Recurs Annually
-                        </Checkbox>
+                        </Checkbox> */}
                     </ModalBody>
 
                     <ModalFooter>

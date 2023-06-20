@@ -66,16 +66,6 @@ export default function Giftlax() {
     }
 
     const current = new Date();
-    const weekday = [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-    ];
-    let day = weekday[current.getDay()];
     const month = [
         "January",
         "February",
@@ -91,11 +81,10 @@ export default function Giftlax() {
         "December",
     ];
     let monthName = month[current.getMonth()];
-    const date = `${day} ${monthName} ${current.getDate()}, ${current.getFullYear()}`;
+    const date = `${monthName} ${current.getDate()}, ${current.getFullYear()}`;
 
     return (
         <ChakraProvider>
-            {/* <Text>JSON string: {myJSON}</Text> */}
             <HStack spacing="10" ml="40" mr="40" mt="20" mb="20">
                 <Box width="100%">
                     <Stack spacing="20px">

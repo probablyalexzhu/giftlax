@@ -44,7 +44,7 @@ export default function GiftListInput({ item, eventList, handleListChange }) {
         <Editable
             textAlign="left"
             defaultValue={item?.gifts}
-            fontSize="2xl"
+            fontSize="lg"
             isPreviewFocusable={false}
         >
             <EditablePreview />

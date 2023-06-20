@@ -104,7 +104,7 @@ function CompleteButton({ recordId, isComplete }) {
                 title: "Event completed!",
                 description: "We've completed that event for you.",
                 status: "success",
-                duration: 5000,
+                duration: 3000,
                 isClosable: true,
             });
             reward();
@@ -114,7 +114,7 @@ function CompleteButton({ recordId, isComplete }) {
                 title: "Event uncompleted.",
                 description: "We've uncompleted that event for you.",
                 status: "success",
-                duration: 5000,
+                duration: 3000,
                 isClosable: true,
             });
             updateDatabaseCompletion();

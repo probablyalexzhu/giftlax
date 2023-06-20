@@ -17,6 +17,7 @@ import { useState } from "react";
 import { FiGift } from "react-icons/fi";
 import GiftListInput from "./GiftListInput.js";
 import NotesInput from "./NotesInput.js";
+import RandomGift from "./RandomGift.js"
 import PocketBase from "pocketbase";
 
 export default function GiftModal({ item }) {
@@ -35,7 +36,7 @@ export default function GiftModal({ item }) {
             title: "Gifts updated.",
             description: "We've updated those gifts for you.",
             status: "success",
-            duration: 5000,
+            duration: 3000,
             isClosable: true,
         });
         onClose();
@@ -73,6 +74,12 @@ export default function GiftModal({ item }) {
                             eventList={eventList}
                             handleListChange={handleListChange}
                         />
+                        <FormLabel mt={4}>Notes</FormLabel>
+                        <NotesInput
+                            item={item}
+                            eventNotes={eventNotes}
+                            handleNotesChange={handleNotesChange}
+                        />
                         {item?.budget != 0 ? (
                             <div>
                                 <FormLabel mt={4}>Spent</FormLabel>
@@ -83,12 +90,8 @@ export default function GiftModal({ item }) {
                                 />
                             </div>
                         ) : (<div></div>)}
-                        <FormLabel mt={4}>Notes</FormLabel>
-                        <NotesInput
-                            item={item}
-                            eventNotes={eventNotes}
-                            handleNotesChange={handleNotesChange}
-                        />
+                        <FormLabel mt={4}>Idea Generator</FormLabel>
+                        <RandomGift/>
                     </ModalBody>
                     <ModalFooter>
                         <Button

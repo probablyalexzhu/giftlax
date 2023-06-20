@@ -46,7 +46,7 @@ export default function NotesInput({ item, eventNotes, handleNotesChange }) {
         <Editable
             textAlign="left"
             defaultValue={item?.notes}
-            fontSize="2xl"
+            fontSize="lg"
             isPreviewFocusable={false}
         >
             <EditablePreview />
