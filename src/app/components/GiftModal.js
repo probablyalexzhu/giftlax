@@ -40,15 +40,16 @@ export default function GiftModal({ item }) {
     const [eventNotes, setNotes] = useState(item?.notes);
     const handleNotesChange = (event) => setNotes(event.target.value);
     const recordId = item?.id;
+    const toast = useToast();
 
     function handleUpdate(eventList, eventNotes) {
-        // toast({
-        //     title: "Event updated.",
-        //     description: "We've updated that event for you.",
-        //     status: "success",
-        //     duration: 5000,
-        //     isClosable: true,
-        // });
+        toast({
+            title: "Gifts updated.",
+            description: "We've updated those gifts for you.",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+        });
         onClose();
         updateDatabaseEvent(eventList, eventNotes);
     }

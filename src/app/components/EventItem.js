@@ -9,6 +9,7 @@ import {
     Divider,
     Progress,
     Box,
+    useToast,
 } from "@chakra-ui/react";
 import EventModalButton from "./EventModal.js";
 import { useReward } from "react-rewards";
@@ -83,17 +84,26 @@ export default function EventItem({ item, isComplete }) {
 
 function CompleteButton({ recordId, isComplete }) {
     const { reward, isAnimating } = useReward(recordId, "confetti");
+    const toast = useToast();
 
     function handleComplete() {
-        // toast({
-        //     title: "Event updated.",
-        //     description: "We've updated that event for you.",
-        //     status: "success",
-        //     duration: 5000,
-        //     isClosable: true,
-        // });
         if(!isComplete) {
+            toast({
+                title: "Event completed!",
+                description: "We've completed that event for you.",
+                status: "success",
+                duration: 5000,
+                isClosable: true,
+            });
             reward();
+        } else {
+            toast({
+                title: "Event uncompleted.",
+                description: "We've uncompleted that event for you.",
+                status: "success",
+                duration: 5000,
+                isClosable: true,
+            });
         }
         setTimeout(() => {
             updateDatabaseCompletion();
