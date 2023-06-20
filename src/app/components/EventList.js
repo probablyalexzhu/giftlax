@@ -2,6 +2,9 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import EventItem from "./EventItem.js";
 
 export default function EventList({ data }) {
+    console.log(data);
+    const pendingData = data.filter(item => item?.completed == false);
+    const completedData = data.filter(item => item?.completed == true);
     return (
         <Tabs variant="enclosed-colored" colorScheme="orange">
             <TabList>
@@ -10,38 +13,22 @@ export default function EventList({ data }) {
             </TabList>
             <TabPanels>
                 <TabPanel>
-                    <div>
-                        {data.map((item) =>
-                            // just add a key for no warning
-                            item?.completed == false ? (
-                                <EventItem
-                                    key={item?.id}
-                                    item={item}
-                                    isComplete={false}
-                                />
-                            ) : (
-                                <div></div>
-                            )
-                        )}
-                    </div>
+                    {pendingData.map((item) =>
+                        <EventItem
+                            key={item?.id}
+                            item={item}
+                            isComplete={false}
+                        />
+                    )}
                 </TabPanel>
                 <TabPanel>
-                    <div>
-                        {data.toReversed().map(
-                            (
-                                item // reverse for completed
-                            ) =>
-                                item?.completed == true ? (
-                                    <EventItem
-                                        key={item?.id}
-                                        item={item}
-                                        isComplete={true}
-                                    />
-                                ) : (
-                                    <div></div>
-                                )
+                        {completedData.toReversed().map((item) =>
+                            <EventItem
+                                key={item?.id}
+                                item={item}
+                                isComplete={true}
+                            />
                         )}
-                    </div>
                 </TabPanel>
             </TabPanels>
         </Tabs>
