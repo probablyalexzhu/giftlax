@@ -14,7 +14,6 @@ import { useRef, useState } from "react";
 export default function NotesInput({ item, eventNotes, handleNotesChange }) {
     /* Here's a custom control */
     function EditableControls() {
-        console.log(eventNotes);
 
         const {
             isEditing,

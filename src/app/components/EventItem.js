@@ -97,6 +97,7 @@ function CompleteButton({ recordId, isComplete }) {
                 isClosable: true,
             });
             reward();
+            setTimeout(() => {updateDatabaseCompletion();}, 3000);
         } else {
             toast({
                 title: "Event uncompleted.",
@@ -105,16 +106,13 @@ function CompleteButton({ recordId, isComplete }) {
                 duration: 5000,
                 isClosable: true,
             });
-        }
-        setTimeout(() => {
             updateDatabaseCompletion();
-        }, 3000);
+        }
     }
 
     async function updateDatabaseCompletion() {
         const pb = new PocketBase("http://127.0.0.1:8090");
         // console.log(eventDate);
-        console.log(recordId.toString());
         let data = { completed: true };
         // edit data
         if (isComplete) {
@@ -123,7 +121,6 @@ function CompleteButton({ recordId, isComplete }) {
             };
         }
         const record = await pb.collection("events").update(recordId, data);
-        console.log("bazinga");
     }
 
     return isComplete ? (

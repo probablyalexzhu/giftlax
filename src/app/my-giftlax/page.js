@@ -22,7 +22,6 @@ export default function Giftlax() {
         // Anything in here is fired on component mount.
         return () => {
             // Anything in here is fired on component unmount.
-            console.log("bye");
             pb.collection("events").unsubscribe("*");
         };
     }, []);

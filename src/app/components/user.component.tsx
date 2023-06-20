@@ -7,7 +7,6 @@ import { LoginButton2 } from "./buttons.component";
 
 export const User = () => {
     const { data: session } = useSession();
-    console.log(session);
     let name = "";
     let imgLink = "";
     if (typeof session !== "undefined" && session != null) {

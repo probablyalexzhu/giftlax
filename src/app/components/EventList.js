@@ -2,7 +2,6 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import EventItem from "./EventItem.js";
 
 export default function EventList({ data }) {
-    console.log(data);
     const pendingData = data.filter(item => item?.completed == false);
     const completedData = data.filter(item => item?.completed == true);
     return (

@@ -40,8 +40,6 @@ export default function GiftModal({ item }) {
     }
 
     async function updateDatabaseEvent(eventList, eventNotes) {
-        console.log(eventList);
-        console.log(eventNotes);
 
         const pb = new PocketBase("http://127.0.0.1:8090");
         // console.log(eventDate);
@@ -51,7 +49,6 @@ export default function GiftModal({ item }) {
             notes: eventNotes,
         };
         const record = await pb.collection("events").update(recordId, data);
-        console.log("bazinga");
     }
 
     return (
