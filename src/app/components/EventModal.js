@@ -33,6 +33,8 @@ export default function EventModalButton({ item }) {
 
     const [eventName, setName] = useState("");
     const handleNameChange = (event) => setName(event.target.value);
+    const [eventBudget, setBudget] = useState(0);
+    const handleBudgetChange = (event) => setBudget(event.target.value);
     const [eventDate, setDate] = useState("");
     const handleDateChange = (event) => setDate(event.target.value);
     const toast = useToast();
@@ -57,6 +59,7 @@ export default function EventModalButton({ item }) {
         const data = {
             name: eventName,
             date: eventDate,
+            budget: eventBudget,
         };
         const record = await pb.collection("events").update(recordId, data);
     }
@@ -94,7 +97,10 @@ export default function EventModalButton({ item }) {
 
                         <FormControl mt={4}>
                             <FormLabel>Budget</FormLabel>
-                            <Input placeholder="Budget (optional)" />
+                            <Input
+                                placeholder="Budget (optional)"
+                                value={eventBudget}
+                                onChange={handleBudgetChange}/>
                         </FormControl>
 
                         <FormControl mt={4} isRequired isInvalid={isDateError}>

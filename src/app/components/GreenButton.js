@@ -27,6 +27,8 @@ export default function GreenButton(email) {
     const emailString = JSON.parse(JSON.stringify(email)).email;
     const [eventName, setName] = useState("");
     const handleNameChange = (event) => setName(event.target.value);
+    const [eventBudget, setBudget] = useState(0);
+    const handleBudgetChange = (event) => setBudget(event.target.value);
     const [eventDate, setDate] = useState("");
     const handleDateChange = (event) => setDate(event.target.value);
     const toast = useToast();
@@ -52,6 +54,7 @@ export default function GreenButton(email) {
             gifts: "test",
             date: eventDate,
             email: emailString,
+            budget: eventBudget,
         };
 
         const record = await pb.collection("events").create(data);
@@ -91,7 +94,11 @@ export default function GreenButton(email) {
 
                         <FormControl mt={4}>
                             <FormLabel>Budget</FormLabel>
-                            <Input placeholder="Budget (optional)" />
+                            <Input
+                                placeholder="Budget (optional)"
+                                value={eventBudget}
+                                onChange={handleBudgetChange}
+                            />
                         </FormControl>
 
                         <FormControl mt={4} isRequired isInvalid={isDateError}>

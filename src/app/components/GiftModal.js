@@ -11,6 +11,7 @@ import {
     FormLabel,
     useToast,
     Icon,
+    Input,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { FiGift } from "react-icons/fi";
@@ -22,6 +23,8 @@ export default function GiftModal({ item }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [eventList, setList] = useState(item?.gifts);
     const handleListChange = (event) => setList(event.target.value);
+    const [eventSpent, setSpent] = useState(item?.spent);
+    const handleSpentChange = (event) => setSpent(event.target.value);
     const [eventNotes, setNotes] = useState(item?.notes);
     const handleNotesChange = (event) => setNotes(event.target.value);
     const recordId = item?.id;
@@ -47,6 +50,7 @@ export default function GiftModal({ item }) {
         const data = {
             gifts: eventList,
             notes: eventNotes,
+            spent: eventSpent,
         };
         const record = await pb.collection("events").update(recordId, data);
     }
@@ -69,7 +73,16 @@ export default function GiftModal({ item }) {
                             eventList={eventList}
                             handleListChange={handleListChange}
                         />
-
+                        {item?.budget != 0 ? (
+                            <div>
+                                <FormLabel mt={4}>Spent</FormLabel>
+                                <Input
+                                    placeholder="Spent"
+                                    value={eventSpent}
+                                    onChange={handleSpentChange}
+                                />
+                            </div>
+                        ) : (<div></div>)}
                         <FormLabel mt={4}>Notes</FormLabel>
                         <NotesInput
                             item={item}

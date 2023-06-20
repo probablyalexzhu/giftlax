@@ -21,6 +21,8 @@ export default function EventItem({ item, isComplete }) {
     const gifts = item?.gifts;
     const notes = item?.notes;
     const recordId = item?.id.toString();
+    const spent = item?.spent;
+    const budget = item?.budget;
 
     const month = [
         "January",
@@ -47,10 +49,13 @@ export default function EventItem({ item, isComplete }) {
     if (isComplete) {
         bg = "green.50";
     }
+    let spentColor = "green";
+    if(spent > budget) {
+        spentColor = "red";
+    }
 
     return (
         <div>
-            <Divider />
             <Flex spacing="10" padding="5" background={bg}>
                 <Stack as="span" flex="1" textAlign="left">
                     <Text fontSize="lg">
@@ -61,12 +66,17 @@ export default function EventItem({ item, isComplete }) {
                     <Text>Notes: {notes}</Text>
                     <Box width="25%">
                         <Stack>
-                            <Text fontSize="sm">Money spent: </Text>
-                            <Progress
-                                hasStripe
-                                colorScheme="green"
-                                value={64}
-                            />
+                            {budget != 0 ? (
+                                <div>
+                                    <Text>Money Spent: ${spent} out of ${budget}</Text>
+                                    <Progress
+                                        hasStripe
+                                        colorScheme={spentColor}
+                                        value={(spent/budget) * 100}
+                                    /> 
+                                </div>
+                            ) : (<div></div>)}
+                            
                         </Stack>
                     </Box>
                 </Stack>
@@ -79,6 +89,7 @@ export default function EventItem({ item, isComplete }) {
                     />
                 </HStack>
             </Flex>
+            <Divider />
         </div>
     );
 }
