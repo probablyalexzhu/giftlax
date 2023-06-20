@@ -14,7 +14,7 @@ export default function EventList({ data }) {
                         {data.map((item) => (
                             // just add a key for no warning
                             item?.completed == false ?
-                                <EventItem key={item?.id} item={item} />
+                                <EventItem key={item?.id} item={item} isComplete={false}/>
                             :
                             <div></div>
                         ))}
@@ -22,10 +22,10 @@ export default function EventList({ data }) {
                 </TabPanel>
                 <TabPanel>
                     <div>
-                        {data.map((item) => (
+                        {data.toReversed().map((item) => ( // reverse for completed
                             // just add a key for no warning
                             item?.completed == true ?
-                                <EventItem key={item?.id} item={item} />
+                                <EventItem key={item?.id} item={item} isComplete={true}/>
                             :
                             <div></div>
                         ))}
