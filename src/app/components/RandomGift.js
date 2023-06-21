@@ -8,9 +8,14 @@ import {
     CardFooter,
     Heading,
     Button,
+    ButtonGroup,
     Image,
+    Link,
+    HStack,
+    Spacer,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { ExternalLinkIcon } from "@chakra-ui/icons";
 
 export default function RandomGift() {
     const gifts = [
@@ -564,11 +569,19 @@ export default function RandomGift() {
         },
     ];
     const [idx, setIdx] = useState(Math.floor(Math.random() * 91)); // 91 images
-    const [img, setImg] = useState(`https://source.unsplash.com/collection/9856561/?sig=${Math.floor(Math.random() * 100)}`)
+    const [img, setImg] = useState(
+        `https://source.unsplash.com/collection/9856561/?sig=${Math.floor(
+            Math.random() * 100
+        )}`
+    );
 
     function handleClick() {
         setIdx(Math.floor(Math.random() * 91));
-        setImg(`https://source.unsplash.com/collection/9856561/?sig=${Math.floor(Math.random() * 100)}`);
+        setImg(
+            `https://source.unsplash.com/collection/9856561/?sig=${Math.floor(
+                Math.random() * 100
+            )}`
+        );
     }
 
     return (
@@ -588,20 +601,40 @@ export default function RandomGift() {
                 <Stack>
                     <CardBody>
                         <Heading size="md">{gifts.at(idx)?.name}</Heading>
-                        <Text py="2">{gifts.at(idx)?.description}</Text>
-                        <Text color='orange.600' fontSize='2xl'>{gifts.at(idx)?.price}</Text>
+                        <Text py="4">{gifts.at(idx)?.description}</Text>
+                        <Text color="orange.600" fontSize="2xl" mb="4">
+                            {gifts.at(idx)?.price}
+                        </Text>
+                        <LinkButtons name={gifts.at(idx)?.name}/>
                     </CardBody>
 
                     <CardFooter>
-                        <Button
-                            variant="solid"
-                            colorScheme="orange"
-                            onClick={() => handleClick()}>
-                            Next Idea
-                        </Button>
+                            <Button
+                                variant="solid"
+                                colorScheme="orange"
+                                onClick={() => handleClick()}
+                            >
+                                Next Idea
+                            </Button>
                     </CardFooter>
                 </Stack>
             </Card>
         </ChakraProvider>
+    );
+}
+
+function LinkButtons({ name }) {
+    const amazonLink = "https://www.amazon.com/s?k=" + name.replace(/\ +/g, '+').toLowerCase();
+    const etsyLink = "https://www.etsy.com/search?q=" + name.replace(/\ +/g, '%20').toLowerCase();
+    return (
+        <HStack>
+            <Link href={etsyLink} isExternal>
+                Etsy <ExternalLinkIcon mx="4px" />
+            </Link>
+            <Link href={amazonLink} isExternal>
+                Amazon <ExternalLinkIcon mx="4px" />
+            </Link>
+        </HStack>
+        
     );
 }

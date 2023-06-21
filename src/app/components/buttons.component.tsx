@@ -3,7 +3,7 @@
 
 import { signIn, signOut } from "next-auth/react";
 import NextLink from "next/link";
-import Image from 'next/image'
+import Image from "next/image";
 import React from "react";
 import { Button, Icon, Heading, HStack } from "@chakra-ui/react";
 import { FiGift } from "react-icons/fi";
@@ -57,18 +57,17 @@ export const HomeButton = () => {
     return (
         <NextLink href="/" passHref>
             <HStack>
-                <Image src="/logoOnly.png" alt="Giftlax Logo" width="50" height="50" />
-                <Heading color="white" size="xl">Giftlax</Heading>
+                <Image
+                    src="/logoOnly.png"
+                    alt="Giftlax Logo"
+                    width="50"
+                    height="50"
+                    style={{ width: "auto", height: "auto" }}
+                />
+                <Heading color="white" size="xl">
+                    Giftlax
+                </Heading>
             </HStack>
-            
-            {/* <Button
-                color="white"
-                variant="link"
-                size="lg"
-                leftIcon=<CustomIcon/>
-            >
-                Home
-            </Button> */}
         </NextLink>
     );
 };

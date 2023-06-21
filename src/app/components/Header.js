@@ -11,13 +11,13 @@ import {
 const Header = () => {
     return (
         <ChakraProvider>
-            <Box className="header" bgColor="orange" padding="5">
+            <Box className="header" bgColor="orange" >
                 <Flex ml="5" mr="10">
                     <HStack>
                         <HomeButton />
                     </HStack>
                     <Spacer />
-                    <HStack spacing="40px">
+                    <HStack spacing="40px" padding="5">
                         <GiftlaxButton />
                         <LoginButton />
                         <LogoutButton />

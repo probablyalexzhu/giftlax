@@ -13,19 +13,37 @@ import {
     Avatar,
     Skeleton,
     Spinner,
+    useToast,
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    PopoverBody,
+    PopoverFooter,
+    PopoverArrow,
+    PopoverCloseButton,
+    Stat,
+    StatLabel,
+    StatNumber,
 } from "@chakra-ui/react";
 import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 export default function Giftlax() {
     useEffect(() => {
-        // Anything in here is fired on component mount.
+        // fired on component mount.
+        toast({
+            title: "Welcome! Good to see you!",
+            status: "info",
+            duration: 1500,
+            isClosable: true,
+        });
         return () => {
-            // Anything in here is fired on component unmount.
+            // fired on component unmount.
             pb.collection("events").unsubscribe("*");
         };
     }, []);
 
+    const toast = useToast();
     const [data, setData] = useState([]);
     const [myJSON, setState] = useState("nothing yet");
     const { data: session, status } = useSession({
@@ -99,6 +117,7 @@ export default function Giftlax() {
                                 <UserBar
                                     name={session?.user?.name}
                                     link={session?.user?.image}
+                                    data={data}
                                 />
                             )}
                             <NewModal email={session?.user?.email} />
@@ -122,17 +141,48 @@ export default function Giftlax() {
 export const UserBar = (props) => {
     return (
         <ChakraProvider>
-            <HStack spacing="15px">
-                <Text fontSize="lg">
-                    <b>{props.name}</b>
-                </Text>
-                <Avatar
-                    bg="orange.400"
-                    size="sm"
-                    name={props.name}
-                    src={props.link}
-                />{" "}
-            </HStack>
+            <PopoverStats props={props}/>
         </ChakraProvider>
     );
 };
+
+function PopoverStats({ props }) {
+    const numEvents = props?.data?.length;
+    return (
+        <Popover
+            placement="left-start"
+            closeOnBlur={true}
+        >
+            <PopoverTrigger>
+                <HStack spacing="15px">
+                    <Text fontSize="lg">
+                        <u><b>{props.name}</b></u>
+                    </Text>
+                    <Avatar
+                        bg="orange.400"
+                        size="sm"
+                        name={props.name}
+                        src={props.link}
+                    />{" "}
+                </HStack>
+            </PopoverTrigger>
+            <PopoverContent color="white" bg="orange.600" borderColor="orange.600">
+                <PopoverArrow bg="orange.600" />
+                <PopoverBody>
+                    <Stat>
+                        <StatLabel>Total so far</StatLabel>
+                        <StatNumber>{numEvents} Events</StatNumber>
+                    </Stat>
+                </PopoverBody>
+                <PopoverFooter
+                    border="0"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="space-between"
+                    pb={4}
+                >
+                </PopoverFooter>
+            </PopoverContent>
+        </Popover>
+    );
+}
