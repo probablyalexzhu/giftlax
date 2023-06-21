@@ -28,12 +28,12 @@ export default async function Home() {
                     fontWeight="extrabold"
                     size="6xl"
                 >
-                    Never miss a gift-giving opportunity again
+                    Never miss a gift-giving opportunity again.
                 </Heading>
             </Center>
             <Center mt="100px" mb="50px" color="black">
                 <Text fontSize="2xl">
-                    with the simple site that effortlessly tracks all your
+                    The simple site that effortlessly tracks all your
                     special occasions, gift ideas, and expenses, <b>Giftlax</b>.
                 </Text>
             </Center>

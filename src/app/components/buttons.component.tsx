@@ -39,7 +39,7 @@ export const LoginButton2 = (props) => {
                 variant="solid"
                 onClick={() => signIn()}
             >
-                Log In
+                Sign Up
             </Button>
         );
     } else {

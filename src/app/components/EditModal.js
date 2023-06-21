@@ -33,7 +33,7 @@ export default function EditModalButton({ item }) {
 
     const [eventName, setName] = useState(item?.name);
     const handleNameChange = (event) => setName(event.target.value);
-    const [eventBudget, setBudget] = useState(0);
+    const [eventBudget, setBudget] = useState();
     const handleBudgetChange = (event) => setBudget(event.target.value);
     const [eventDate, setDate] = useState(item?.date.substring(0, item?.date.indexOf(' ')));
     const handleDateChange = (event) => setDate(event.target.value);

@@ -8,6 +8,8 @@ import {
     Progress,
     Box,
     useToast,
+    useDisclosure,
+    ScaleFade,
 } from "@chakra-ui/react";
 import EventModalButton from "./EditModal.js";
 import { useReward } from "react-rewards";
@@ -44,6 +46,8 @@ export default function EventItem({ item, isComplete }) {
     const yearString = dateParts[0].substr(0, 4);
     let monthName = month[parseInt(monthString, 10) - 1];
     const dateString = `${monthName} ${parseInt(dayString, 10)}, ${yearString}`;
+    const { isOpen, onToggle } = useDisclosure()
+
     // console.log(rewardId);
     let bg = "white";
     if (isComplete) {
@@ -55,7 +59,7 @@ export default function EventItem({ item, isComplete }) {
     }
 
     return (
-        <div>
+        <ScaleFade in={true}>
             <Flex spacing="10" padding="5" background={bg}>
                 <Stack as="span" flex="1" textAlign="left">
                     <Text fontSize="lg">
@@ -90,7 +94,7 @@ export default function EventItem({ item, isComplete }) {
                 </HStack>
             </Flex>
             <Divider />
-        </div>
+        </ScaleFade>
     );
 }
 

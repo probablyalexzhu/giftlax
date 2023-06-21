@@ -27,7 +27,7 @@ export default function GreenButton(email) {
     const emailString = JSON.parse(JSON.stringify(email)).email;
     const [eventName, setName] = useState("");
     const handleNameChange = (event) => setName(event.target.value);
-    const [eventBudget, setBudget] = useState(0);
+    const [eventBudget, setBudget] = useState();
     const handleBudgetChange = (event) => setBudget(event.target.value);
     const [eventDate, setDate] = useState("");
     const handleDateChange = (event) => setDate(event.target.value);
