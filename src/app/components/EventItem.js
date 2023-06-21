@@ -125,7 +125,7 @@ function CompleteButton({ recordId, isComplete }) {
         const pb = new PocketBase("http://127.0.0.1:8090");
         // console.log(eventDate);
         let data = { completed: true };
-        // edit data
+        // update data
         if (isComplete) {
             data = {
                 completed: false,

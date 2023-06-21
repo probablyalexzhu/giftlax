@@ -1,16 +1,9 @@
 "use client";
 import {
     ChakraProvider,
-    Box,
     Stack,
-    HStack,
-    Spacer,
     Text,
-    Avatar,
-    Skeleton,
-    Spinner,
     Card,
-    CardHeader,
     CardBody,
     CardFooter,
     Heading,

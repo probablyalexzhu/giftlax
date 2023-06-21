@@ -1,10 +1,16 @@
-import { Inter } from "next/font/google";
+import { Inter, Space_Grotesk, Manrope } from "next/font/google";
 import { NextAuthProvider } from "./providers";
 import React from "react";
 import Header from "./components/Header";
 
 // shared between pages; causes preload error
 const inter = Inter({
+    subsets: ["latin"],
+});
+const space = Space_Grotesk({
+    subsets: ["latin"],
+});
+const manrope = Manrope({
     subsets: ["latin"],
 });
 
@@ -20,7 +26,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={inter.className}>
+            <body className={manrope.className}>
                 <NextAuthProvider>
                     <Header />
                     {children}

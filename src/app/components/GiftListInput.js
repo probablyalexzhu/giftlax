@@ -11,7 +11,6 @@ import {
 import { CheckIcon, EditIcon, CloseIcon } from "@chakra-ui/icons";
 
 export default function GiftListInput({ item, eventList, handleListChange }) {
-    /* Here's a custom control */
     function EditableControls() {
         const {
             isEditing,
@@ -48,7 +47,6 @@ export default function GiftListInput({ item, eventList, handleListChange }) {
             isPreviewFocusable={false}
         >
             <EditablePreview />
-            {/* Here is the custom input */}
             <Input
                 as={EditableInput}
                 value={eventList}

@@ -9,12 +9,9 @@ import {
     ButtonGroup,
 } from "@chakra-ui/react";
 import { CheckIcon, EditIcon, CloseIcon } from "@chakra-ui/icons";
-import { useRef, useState } from "react";
 
 export default function NotesInput({ item, eventNotes, handleNotesChange }) {
-    /* Here's a custom control */
     function EditableControls() {
-
         const {
             isEditing,
             getSubmitButtonProps,
@@ -50,7 +47,6 @@ export default function NotesInput({ item, eventNotes, handleNotesChange }) {
             isPreviewFocusable={false}
         >
             <EditablePreview />
-            {/* Here is the custom input */}
             <Input
                 as={EditableInput}
                 value={eventNotes}

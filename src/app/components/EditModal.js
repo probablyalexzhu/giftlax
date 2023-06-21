@@ -29,7 +29,7 @@ import PocketBase from "pocketbase";
 export default function EditModalButton({ item }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const initialRef = useRef(null);
-    const finalRef = useRef(null);
+    // const finalRef = useRef(null);
 
     const [eventName, setName] = useState(item?.name);
     const handleNameChange = (event) => setName(event.target.value);
@@ -54,8 +54,6 @@ export default function EditModalButton({ item }) {
 
     async function updateDatabaseEvent(eventName, eventDate) {
         const pb = new PocketBase("http://127.0.0.1:8090");
-        // console.log(eventDate);
-        // example edit data
         const data = {
             name: eventName,
             date: eventDate,
