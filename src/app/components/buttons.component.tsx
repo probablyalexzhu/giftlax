@@ -5,7 +5,7 @@ import { signIn, signOut } from "next-auth/react";
 import NextLink from "next/link";
 import Image from 'next/image'
 import React from "react";
-import { Button, Icon } from "@chakra-ui/react";
+import { Button, Icon, Heading, HStack } from "@chakra-ui/react";
 import { FiGift } from "react-icons/fi";
 
 export const LoginButton = () => {
@@ -56,7 +56,11 @@ export const LoginButton2 = (props) => {
 export const HomeButton = () => {
     return (
         <NextLink href="/" passHref>
-            <Image src="/logo.png" alt="Giftlax Logo" width="200" height="200" />
+            <HStack>
+                <Image src="/logoOnly.png" alt="Giftlax Logo" width="50" height="50" />
+                <Heading color="white" size="xl">Giftlax</Heading>
+            </HStack>
+            
             {/* <Button
                 color="white"
                 variant="link"
