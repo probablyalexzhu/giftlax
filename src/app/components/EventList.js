@@ -49,7 +49,7 @@ export default function EventList({ data }) {
 
 function EventsListed({ thisData }) {
     return thisData.map((item) => (
-        <EventItem key={item?.id} item={item} isComplete={false} />
+        <EventItem key={item?.id} item={item} isComplete={item?.completed} />
     ));
 }
 
