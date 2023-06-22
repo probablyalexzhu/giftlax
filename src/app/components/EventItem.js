@@ -25,7 +25,27 @@ export default function EventItem({ item, isComplete }) {
     const recordId = item?.id.toString();
     const spent = item?.spent;
     const budget = item?.budget;
-
+    const currentDate = new Date();
+    console.log(date.substr(0, 10));
+    let dateObject = new Date(date.substr(0, 10) + " EDT");
+    dateObject.setHours(0,0,0,0);
+    const daysUntil = Math.ceil((dateObject - currentDate) / (1000 * 60 * 60 * 24));
+    
+    console.log(currentDate);
+    console.log(dateObject);
+    
+    let daysUntilString = "";
+    let untilColor = "black";
+    if(daysUntil > 0) {
+        if(daysUntil <= 7) untilColor = "orange";
+        else untilColor = "green";
+        daysUntilString = daysUntil + " days left";
+    } else if (daysUntil == 0) {
+        untilColor = "red";
+        daysUntilString = "Happening now";
+    } else {
+        daysUntilString = -daysUntil + " days ago";
+    }
     const month = [
         "January",
         "February",
@@ -85,6 +105,7 @@ export default function EventItem({ item, isComplete }) {
                     </Box>
                 </Stack>
                 <HStack>
+                    <Text mr="4" color={untilColor}><b>{daysUntilString}</b></Text>
                     <GiftModal item={item} />
                     <EventModalButton item={item} />
                     <CompleteButton
