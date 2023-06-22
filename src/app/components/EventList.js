@@ -11,13 +11,13 @@ export default function EventList({ data }) {
         <ScaleFade in={true}>
             <HStack spacing="10" padding="5">
                 <Image
-                    src="/logoOnlyBlack.png"
-                    alt="Giftlax Logo Black"
+                    src="/logoOnlyGrey.png"
+                    alt="Giftlax Logo Grey"
                     width="50"
                     height="50"
                     style={{ width: "100px", height: "100px" }}
                 />
-                <Text fontSize="xl">No pending events!</Text>
+                <Text fontSize="xl" color="grey">No pending events</Text>
             </HStack>
         </ScaleFade>
         ;
@@ -28,16 +28,18 @@ export default function EventList({ data }) {
     let completedDataComponent;
     if(completedData.length == 0) {
         completedDataComponent =
-        <HStack spacing="10" padding="5">
-            <Image
-                src="/logoOnlyBlack.png"
-                alt="Giftlax Logo Black"
-                width="50"
-                height="50"
-                style={{ width: "100px", height: "100px" }}
-            />
-            <Text fontSize="xl">No completed events!</Text>
-        </HStack>
+        <ScaleFade in={true}>
+            <HStack spacing="10" padding="5">
+                <Image
+                    src="/logoOnlyGrey.png"
+                    alt="Giftlax Logo Grey"
+                    width="50"
+                    height="50"
+                    style={{ width: "100px", height: "100px" }}
+                />
+                <Text fontSize="xl" color="grey">No completed events</Text>
+            </HStack>
+        </ScaleFade>
         ;
     } else {
         completedDataComponent = <EventsListed thisData={completedData}/>
