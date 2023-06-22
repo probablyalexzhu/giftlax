@@ -51,7 +51,6 @@ export default function GreenButton(email) {
         // create data
         const data = {
             name: eventName,
-            gifts: "test",
             date: eventDate,
             email: emailString,
             budget: eventBudget,

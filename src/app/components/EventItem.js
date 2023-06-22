@@ -38,7 +38,7 @@ export default function EventItem({ item, isComplete }) {
         daysUntilString = daysUntil + " days left";
     } else if (daysUntil == 0) {
         untilColor = "red";
-        daysUntilString = "Happening now";
+        daysUntilString = "Happening today";
     } else {
         daysUntilString = -daysUntil + " days ago";
     }
@@ -83,7 +83,9 @@ export default function EventItem({ item, isComplete }) {
                     </Text>
                     <Text>Date: {dateString}</Text>
                     <Text>Gift List: {gifts}</Text>
-                    <Text>Notes: {notes}</Text>
+                    {notes != "" ? (
+                        <Text>Notes: {notes}</Text>
+                    ) : (<div></div>)}
                     <Box width="35%">
                         <Stack>
                             {budget != 0 ? (
