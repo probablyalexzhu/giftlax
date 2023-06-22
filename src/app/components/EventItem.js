@@ -26,13 +26,9 @@ export default function EventItem({ item, isComplete }) {
     const spent = item?.spent;
     const budget = item?.budget;
     const currentDate = new Date();
-    console.log(date.substr(0, 10));
     let dateObject = new Date(date.substr(0, 10) + " EDT");
     dateObject.setHours(0,0,0,0);
     const daysUntil = Math.ceil((dateObject - currentDate) / (1000 * 60 * 60 * 24));
-    
-    console.log(currentDate);
-    console.log(dateObject);
     
     let daysUntilString = "";
     let untilColor = "black";
