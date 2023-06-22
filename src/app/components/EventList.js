@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
     Tabs,
     TabList,
@@ -9,7 +10,6 @@ import {
     HStack,
     ScaleFade,
 } from "@chakra-ui/react";
-import { useState } from "react";
 import EventItem from "./EventItem.js";
 
 export default function EventList({ data }) {

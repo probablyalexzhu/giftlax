@@ -1,13 +1,11 @@
-// code from https://codevoweb.com/setup-and-use-nextauth-in-nextjs-13-app-directory/
-"use client";
-
+import React from "react";
 import { signIn, signOut } from "next-auth/react";
 import NextLink from "next/link";
 import Image from "next/image";
-import React from "react";
 import { Button, Icon, Heading, HStack } from "@chakra-ui/react";
 import { FiGift } from "react-icons/fi";
 
+// template code from https://codevoweb.com/setup-and-use-nextauth-in-nextjs-13-app-directory/
 export const LoginButton = () => {
     return (
         <Button color="white" variant="link" size="lg" onClick={() => signIn()}>

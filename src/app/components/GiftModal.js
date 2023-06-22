@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
     Modal,
     ModalOverlay,
@@ -13,12 +14,11 @@ import {
     Icon,
     Input,
 } from "@chakra-ui/react";
-import { useState } from "react";
 import { FiGift } from "react-icons/fi";
+import PocketBase from "pocketbase";
 import GiftListInput from "./GiftListInput.js";
 import NotesInput from "./NotesInput.js";
 import RandomGift from "./RandomGift.js"
-import PocketBase from "pocketbase";
 
 export default function GiftModal({ item }) {
     const { isOpen, onOpen, onClose } = useDisclosure();

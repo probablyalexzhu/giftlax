@@ -1,6 +1,11 @@
-"use client";
-
-import { ChakraProvider, Flex, Box, Spacer, HStack } from "@chakra-ui/react";
+"use client"
+import {
+    ChakraProvider,
+    Flex,
+    Box,
+    Spacer,
+    HStack
+} from "@chakra-ui/react";
 import {
     GiftlaxButton,
     HomeButton,
@@ -11,7 +16,7 @@ import {
 const Header = () => {
     return (
         <ChakraProvider>
-            <Box className="header" bgColor="orange" >
+            <Box className="header" bgColor="orange">
                 <Flex ml="5" mr="10">
                     <HStack>
                         <HomeButton />

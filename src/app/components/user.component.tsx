@@ -1,8 +1,6 @@
-"use client";
-
-import { useSession } from "next-auth/react";
 import React from "react";
 import { ChakraProvider, Avatar, Text, VStack } from "@chakra-ui/react";
+import { useSession } from "next-auth/react";
 import { LoginButton2 } from "./buttons.component";
 
 export const User = () => {

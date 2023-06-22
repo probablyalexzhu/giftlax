@@ -11,11 +11,11 @@ import {
     useDisclosure,
     ScaleFade,
 } from "@chakra-ui/react";
-import EventModalButton from "./EditModal.js";
-import { useReward } from "react-rewards";
-import GiftModal from "./GiftModal.js";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import PocketBase from "pocketbase";
+import { useReward } from "react-rewards";
+import EventModalButton from "./EditModal.js";
+import GiftModal from "./GiftModal.js";
 
 export default function EventItem({ item, isComplete }) {
     const eventName = item?.name;

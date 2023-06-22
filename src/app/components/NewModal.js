@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import {
     Modal,
     ModalOverlay,
@@ -16,9 +17,9 @@ import {
     Tooltip,
     useToast,
 } from "@chakra-ui/react";
-import { useRef, useState } from "react";
 import { AddIcon } from "@chakra-ui/icons";
 import PocketBase from "pocketbase";
+
 export default function GreenButton(email) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const initialRef = useRef(null);

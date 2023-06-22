@@ -1,4 +1,4 @@
-"use client";
+import { useState } from "react";
 import {
     ChakraProvider,
     Stack,
@@ -14,7 +14,6 @@ import {
     HStack,
     Spacer,
 } from "@chakra-ui/react";
-import { useState } from "react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 
 export default function RandomGift() {
