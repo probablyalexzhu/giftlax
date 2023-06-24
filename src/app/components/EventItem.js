@@ -40,8 +40,11 @@ export default function EventItem({ item, isComplete }) {
         untilColor = "red";
         daysUntilString = "Happening today";
     } else {
+        untilColor = "red";
         daysUntilString = -daysUntil + " days ago";
     }
+    if(isComplete) untilColor = "black";
+    
     const month = [
         "January",
         "February",
