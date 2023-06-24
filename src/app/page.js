@@ -19,7 +19,7 @@ const customTheme = {
     // extension of theme for future use
 };
 
-export const theme = extendTheme({ customTheme });
+const theme = extendTheme({ customTheme });
 
 export default async function Home() {
     return (
