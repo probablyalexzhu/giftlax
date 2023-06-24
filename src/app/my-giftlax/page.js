@@ -138,7 +138,7 @@ export default function Giftlax() {
     );
 }
 
-export const UserBar = (props) => {
+function UserBar(props) {
     return (
         <ChakraProvider>
             <PopoverStats props={props}/>
