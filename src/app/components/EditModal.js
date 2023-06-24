@@ -43,7 +43,7 @@ export default function EditModalButton({ item }) {
     function handleUpdate(eventName, eventDate) {
         toast({
             title: "Event updated.",
-            description: "We\'ve updated that event for you.",
+            description: "We&apos;ve updated that event for you.",
             status: "success",
             duration: 3000,
             isClosable: true,
