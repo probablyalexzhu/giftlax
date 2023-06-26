@@ -128,7 +128,7 @@ function CompleteButton({ recordId, isComplete }) {
         if (!isComplete) {
             toast({
                 title: "Event completed!",
-                description: "We've completed that event for you.",
+                description: "We completed that event for you.",
                 status: "success",
                 duration: 3000,
                 isClosable: true,
@@ -138,7 +138,7 @@ function CompleteButton({ recordId, isComplete }) {
         } else {
             toast({
                 title: "Event uncompleted.",
-                description: "We've uncompleted that event for you.",
+                description: "We uncompleted that event for you.",
                 status: "success",
                 duration: 3000,
                 isClosable: true,
@@ -148,7 +148,7 @@ function CompleteButton({ recordId, isComplete }) {
     }
 
     async function updateDatabaseCompletion() {
-        const pb = new PocketBase("http://127.0.0.1:8090");
+        const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
         // console.log(eventDate);
         let data = { completed: true };
         // update data

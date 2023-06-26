@@ -34,7 +34,7 @@ export default function GiftModal({ item }) {
     function handleUpdate(eventList, eventNotes) {
         toast({
             title: "Gifts updated.",
-            description: "We've updated those gifts for you.",
+            description: "We updated those gifts for you.",
             status: "success",
             duration: 3000,
             isClosable: true,
@@ -45,7 +45,7 @@ export default function GiftModal({ item }) {
 
     async function updateDatabaseEvent(eventList, eventNotes) {
 
-        const pb = new PocketBase("http://127.0.0.1:8090");
+        const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
         // console.log(eventDate);
         // edit data
         const data = {

@@ -37,7 +37,7 @@ export default function GreenButton(email) {
     function handleSubmit(emailString, eventName, eventDate) {
         toast({
             title: "Event added.",
-            description: "We've added that event for you.",
+            description: "We added that event for you.",
             status: "success",
             duration: 3000,
             isClosable: true,
@@ -47,7 +47,7 @@ export default function GreenButton(email) {
     }
 
     async function createDatabaseEvent(emailString, eventName, eventDate) {
-        const pb = new PocketBase("http://127.0.0.1:8090");
+        const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
         // console.log(eventDate);
         // create data
         const data = {

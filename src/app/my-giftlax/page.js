@@ -52,8 +52,8 @@ export default function Giftlax() {
             redirect("/api/auth/callback/google?callbackUrl=/my-giftlax");
         },
     });
-    const pb = new PocketBase("http://127.0.0.1:8090");
-
+    const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
+    
     // when NextAuth session loads in, fetch from db using session email
     useEffect(() => {
         getDatabaseEvents();
@@ -71,7 +71,7 @@ export default function Giftlax() {
 
         // for live updates
         pb.collection("events").subscribe("*", async function (e) {
-            console.log("update received");
+            // console.log("update received");
 
             // this filter method could be made more secure in the future
             records = await pb.collection("events").getFullList({

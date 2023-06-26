@@ -43,7 +43,7 @@ export default function EditModalButton({ item }) {
     function handleUpdate(eventName, eventDate) {
         toast({
             title: "Event updated.",
-            description: "We&apos;ve updated that event for you.",
+            description: "We updated that event for you.",
             status: "success",
             duration: 3000,
             isClosable: true,
@@ -53,7 +53,7 @@ export default function EditModalButton({ item }) {
     }
 
     async function updateDatabaseEvent(eventName, eventDate) {
-        const pb = new PocketBase("http://127.0.0.1:8090");
+        const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
         const data = {
             name: eventName,
             date: eventDate,
@@ -153,7 +153,7 @@ function DeleteAlertDialog({ item }) {
     function handleDelete(recordId) {
         toast({
             title: "Event deleted.",
-            description: "We've deleted that event for you.",
+            description: "We deleted that event for you.",
             status: "success",
             duration: 3000,
             isClosable: true,
@@ -163,7 +163,7 @@ function DeleteAlertDialog({ item }) {
     }
 
     async function deleteDatabaseEvent(recordId) {
-        const pb = new PocketBase("http://127.0.0.1:8090");
+        const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
         // console.log("delete item id: " + recordId);
         // delete data
         await pb.collection("events").delete(recordId);
