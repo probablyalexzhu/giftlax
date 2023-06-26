@@ -17,7 +17,7 @@ Effortlessly track all your special occasions, gift ideas, and expenses. It's a 
 - Pocketbase
 - Fly.io (self-hosting)
 
-<img src="https://github.com/probablyalexzhu/giftlax/assets/87958079/a750b0e3-5d2d-4704-a7a6-e70f8b32d4a3)" width="343" height="358" />
+<img src="https://github.com/probablyalexzhu/giftlax/assets/87958079/a750b0e3-5d2d-4704-a7a6-e70f8b32d4a3)" width="358" height="343" />
 
 ## Features
 
