@@ -11,10 +11,18 @@ import {
     HomeButton,
     LoginButton,
     LogoutButton,
+    ChatButton,
 } from "./buttons.component";
+import { useSession } from "next-auth/react";
 
 const Header = () => {
+    const { data : session } = useSession();
+    console.log("data: ")
+    console.log(session);
+    console.log(typeof session !== 'undefined' && session != null);
+
     return (
+        
         <ChakraProvider>
             <Box className="header" bgColor="orange">
                 <Flex ml="5" mr="10">
@@ -24,8 +32,12 @@ const Header = () => {
                     <Spacer />
                     <HStack spacing="40px" padding="5">
                         <GiftlaxButton />
-                        <LoginButton />
-                        <LogoutButton />
+                        <ChatButton />
+                        {
+                            typeof session !== 'undefined' && session != null ? (
+                                <LogoutButton />
+                            ) : (<LoginButton />)
+                        }
                     </HStack>
                 </Flex>
             </Box>

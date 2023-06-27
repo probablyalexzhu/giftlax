@@ -85,6 +85,21 @@ export const GiftlaxButton = () => {
     );
 };
 
+export const ChatButton = () => {
+    return (
+        <NextLink href="/chat" passHref>
+            <Button
+                color="white"
+                colorScheme="orange"
+                variant="solid"
+                size="lg"
+            >
+                Chat
+            </Button>
+        </NextLink>
+    );
+};
+
 function CustomIcon() {
     return <Icon as={FiGift} />;
 }
