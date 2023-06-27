@@ -24,7 +24,8 @@ Effortlessly track all your special occasions, gift ideas, and expenses. It's a 
 - Authentication with Auth.js and Google
 - Create, read, update, and delete pending and completed events
 - Gift ideas, notes, and budgets for each event
-- Random gift idea generator
+- Real-time chat with other users
+- Random gift idea generator w/ links to stores
 
 ## How to Use
 Go to [Giftlax](https://giftlax.vercel.app/) and sign up.

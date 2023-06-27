@@ -1,32 +1,39 @@
-import { useState } from "react";
 import {
-    Tabs,
-    TabList,
-    TabPanels,
-    Tab,
-    TabPanel,
     Text,
-    Image,
     HStack,
-    ScaleFade,
     Box,
     Avatar,
     Stack,
 } from "@chakra-ui/react";
-import EventItem from "./EventItem.js";
 
 export default function ChatBox({ data }) {
-    
-    return (
-        <Box>
-            <EventsListed thisData={data}/>
-        </Box>
-    );
+    return data.map((item) => <MessageItem key={item?.id} item={item} />);
 }
 
-function EventsListed({ thisData }) {
-    return thisData.map((item) => (
-        <Box key={item?.id} mt="5">
+function MessageItem({ item }) {
+    const month = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+    ];
+    const dateParts = item?.created?.split("-");
+    const monthString = dateParts[1].substr(0, 2);
+    const dayString = dateParts[2].substr(0, 2);
+    const timeString = dateParts[2].substr(3, 5);
+    let monthName = month[parseInt(monthString, 10) - 1];
+    const dateString = `${monthName} ${parseInt(dayString,10)} at ${timeString}`;
+
+    return (
+        <Box mt="5">
             <HStack>
                 <Avatar
                     bg="orange.400"
@@ -35,39 +42,15 @@ function EventsListed({ thisData }) {
                     src={item?.avatarUrl}
                 />{" "}
                 <Stack>
-                    <Text>
-                        <b>{item?.name}</b>
-                    </Text>
-                    <Text>
-                        {item?.message}
-                    </Text>
+                    <HStack spacing="20px">
+                        <Text>
+                            <b>{item?.name}</b>
+                        </Text>
+                        <Text color="grey">{dateString}</Text>
+                    </HStack>
+                    <Text>{item?.message}</Text>
                 </Stack>
-                
             </HStack>
-            
         </Box>
-    ));
-}
-
-function GiftlaxImage({ text }) {
-    const [isDelayed, setIsDelayed] = useState(true);
-    setTimeout(() => {
-        setIsDelayed(false);
-    }, 500);
-    return !isDelayed ? (
-        <ScaleFade in={true}>
-            <HStack spacing="10" padding="5">
-                <Image
-                    src="/logoOnlyGrey.png"
-                    alt="Giftlax Logo Grey"
-                    width="50"
-                    height="50"
-                    style={{ width: "100px", height: "100px" }}
-                />
-                <Text fontSize="xl" color="grey">
-                    {text}
-                </Text>
-            </HStack>
-        </ScaleFade>
-    ) : (<div></div>);
+    );
 }

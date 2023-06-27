@@ -45,6 +45,7 @@ export default function Giftlax() {
 
     const toast = useToast();
     const [data, setData] = useState([]);
+    console.log(data);
     const [myJSON, setState] = useState("nothing yet");
     const { data: session, status } = useSession({
         required: true,

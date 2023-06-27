@@ -7,30 +7,17 @@ import {
     Box,
     Stack,
     HStack,
-    Spacer,
     Text,
     Avatar,
     Skeleton,
     Spinner,
-    useToast,
-    Popover,
-    PopoverTrigger,
-    PopoverContent,
-    PopoverBody,
-    PopoverFooter,
-    PopoverArrow,
-    PopoverCloseButton,
-    Stat,
-    StatLabel,
-    StatNumber,
     Center,
     FormControl,
-    FormLabel,
     Input,
     Button,
-    Card,
-    Heading,
+    Divider,
 } from "@chakra-ui/react";
+import { ChatIcon } from "@chakra-ui/icons";
 import PocketBase from "pocketbase";
 import ChatBox from "../components/ChatBox.js";
 
@@ -54,9 +41,15 @@ export default function Chat() {
     const [message, setMessage] = useState("");
     const handleMessageChange = (event) => setMessage(event.target.value);
 
-    console.log(session);
-    console.log(session?.user?.name);
-    console.log(session?.user?.image);
+    let yourDate = new Date();
+    const offset = yourDate.getTimezoneOffset();
+    yourDate = new Date(yourDate.getTime() - offset * 60 * 1000);
+    yourDate = yourDate.toISOString().split("T")[0];
+    // console.log(yourDate);
+    let yourDateFilter = `created > '${yourDate}'`;
+    // console.log(yourDateFilter);
+    // console.log(session?.user?.name);
+    // console.log(session?.user?.image);
 
     // when NextAuth session loads in, fetch from db using session email
     useEffect(() => {
@@ -66,31 +59,38 @@ export default function Chat() {
     async function getDatabaseEvents() {
         // for initial page opening
         // this filter method could be made more secure in the future
-        let records = await pb.collection("chat").getList(1, 5, {});
-        setData(records);
+        let records = await pb.collection("chat").getList(1, 20, {
+            sort: "-created",
+            filter: yourDateFilter,
+        });
+        setData(records.items);
 
         // for live updates
-        pb.collection("events").subscribe("*", async function (e) {
+        pb.collection("chat").subscribe("*", async function (e) {
             // console.log("update received");
 
             // this filter method could be made more secure in the future
-            records = await pb.collection("chat").getList(1, 5, {});
-            setData(records);
+            records = await pb.collection("chat").getList(1, 20, {
+                sort: "-created",
+                filter: yourDateFilter,
+            });
+            setData(records.items);
         });
     }
 
-    console.log("records!")
-    console.log(data);
+    // console.log(data);
 
     function handleSubmit() {
         createDatabaseEvent();
+        setMessage("");
     }
 
     async function createDatabaseEvent() {
+        if (message == "" || message.length > 75) return;
         const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
-        console.log("hello");
-        console.log(session?.user?.name);
-        console.log(message);
+        // console.log("hello");
+        // console.log(session?.user?.name);
+        // console.log(message);
         // create data
         const data = {
             name: session?.user?.name,
@@ -104,60 +104,69 @@ export default function Chat() {
     return (
         <ChakraProvider>
             <Center spacing="20px">
-                <HStack width="50%" mt="100px" >
-                    <Stack>
-                    <Text fontSize="4xl">
+                <Stack>
+                    <HStack width="50%" maxWidth="4xl" mt="100px">
+                        <Stack>
+                            <Text fontSize="4xl">
                                 <b>Chat</b>
                             </Text>
-                {status === "loading" ? (
-                    <Stack spacing="30px" padding="5">
-                        <Skeleton height="180px" />
-                    </Stack>
-                ) : (
-                    
-                        <ChatBox data={data} />
-                    
-                )}
-                    </Stack>
-                </HStack>
-            </Center>
-            <Center mt="50px">
-            <HStack width="50%">
-                <FormControl isRequired>
-                    <Input
-                        placeholder="Message other Giftlax users"
-                        value={message}
-                        onChange={handleMessageChange}
-                    />
-                </FormControl>
-                <Button
-                    colorScheme="green"
-                    mr={3}
-                    onClick={() => handleSubmit()}
-                >
-                    Send
-                </Button>
-            </HStack>
-            </Center>
-            <Center mt="20px">
-            <HStack width="50%">
-            {status === "loading" ? (
-                    <Spinner />
-                ) : (
-                    <UserBar
-                        name={session?.user?.name}
-                        link={session?.user?.image}
-                    />
-                )}
-            </HStack>
+                            <Text>
+                                Feel free to discuss gift ideas! Please keep
+                                chat appropriate. Messages are cleared within 24
+                                hours.
+                            </Text>
+                            <Divider></Divider>
+                            {status === "loading" ? (
+                                <Skeleton height="400px" />
+                            ) : (
+                                <Box
+                                    overflowY="auto"
+                                    maxHeight="380px"
+                                    minWidth="3xl"
+                                >
+                                    <ChatBox data={data} />
+                                </Box>
+                            )}
+                        </Stack>
+                    </HStack>
+                    <Box>
+                        <HStack mt="20px">
+                            <FormControl isRequired>
+                                <Input
+                                    placeholder="Message other Giftlax users"
+                                    value={message}
+                                    onChange={handleMessageChange}
+                                />
+                            </FormControl>
+                            <Button
+                                colorScheme="green"
+                                mr={3}
+                                onClick={() => handleSubmit()}
+                                rightIcon={<ChatIcon />}
+                            >
+                                Send
+                            </Button>
+                        </HStack>
+                        <HStack width="50%" mt="20px">
+                            {status === "loading" ? (
+                                <Spinner />
+                            ) : (
+                                <UserBar
+                                    name={session?.user?.name}
+                                    link={session?.user?.image}
+                                />
+                            )}
+                        </HStack>
+                    </Box>
+                </Stack>
             </Center>
         </ChakraProvider>
     );
 }
 
 function UserBar(props) {
-    console.log("propagations");
-    console.log(props);
+    // console.log("propagations");
+    // console.log(props);
 
     return (
         <HStack>
@@ -167,9 +176,7 @@ function UserBar(props) {
                 name={props?.name}
                 src={props?.link}
             />{" "}
-            <Text fontSize="lg">
-                    {props?.name}
-            </Text>
+            <Text fontSize="lg">{props?.name}</Text>
         </HStack>
     );
 }

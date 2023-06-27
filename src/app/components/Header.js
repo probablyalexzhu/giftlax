@@ -17,9 +17,6 @@ import { useSession } from "next-auth/react";
 
 const Header = () => {
     const { data : session } = useSession();
-    console.log("data: ")
-    console.log(session);
-    console.log(typeof session !== 'undefined' && session != null);
 
     return (
         
