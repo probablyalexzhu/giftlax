@@ -147,7 +147,7 @@ export default function Chat() {
                                 Send
                             </Button>
                         </HStack>
-                        <HStack width="50%" mt="20px">
+                        <HStack width="50%" mt="20px" mb="100px">
                             {status === "loading" ? (
                                 <Spinner />
                             ) : (

@@ -25,12 +25,13 @@ function MessageItem({ item }) {
         "November",
         "December",
     ];
-    const dateParts = item?.created?.split("-");
-    const monthString = dateParts[1].substr(0, 2);
-    const dayString = dateParts[2].substr(0, 2);
-    const timeString = dateParts[2].substr(3, 5);
-    let monthName = month[parseInt(monthString, 10) - 1];
-    const dateString = `${monthName} ${parseInt(dayString,10)} at ${timeString}`;
+    let dateObject = new Date(item?.created).toString();
+    const dateParts = dateObject.split(" ");
+    const monthString = dateParts[1];
+    const dayString = dateParts[2];
+    let timeString = dateParts[4].substring(0, 5);
+    timeString = timeString.replace(/^[0:]+(?=\d[\d:]{3})/, '');
+    const dateString = `${monthString} ${parseInt(dayString,10)} at ${timeString}`;
 
     return (
         <Box mt="5">
