@@ -569,17 +569,17 @@ export default function RandomGift() {
     ];
     const [idx, setIdx] = useState(Math.floor(Math.random() * 91)); // 91 images
     const [img, setImg] = useState(
-        `https://source.unsplash.com/collection/9856561/?sig=${Math.floor(
+        `https://picsum.photos/seed/${Math.floor(
             Math.random() * 100
-        )}`
+        )}/400/400`
     );
 
     function handleClick() {
         setIdx(Math.floor(Math.random() * 91));
         setImg(
-            `https://source.unsplash.com/collection/9856561/?sig=${Math.floor(
-                Math.random() * 100
-            )}`
+            `https://picsum.photos/seed/${Math.floor(
+            Math.random() * 100
+            )}/400/400`
         );
     }
 
