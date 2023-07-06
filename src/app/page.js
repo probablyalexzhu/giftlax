@@ -104,7 +104,7 @@ export default async function Home() {
                     <Link href="https://github.com/probablyalexzhu/giftlax" isExternal>
                         GitHub <ExternalLinkIcon mx="4px" />
                     </Link>
-                    <Link href="https://probablyalexzhu.github.io/" isExternal>
+                    <Link href="https://probablyalexzhu.github.io/blog/tutorial-learning-full-stack-project/" isExternal>
                         Blog <ExternalLinkIcon mx="4px" />
                     </Link>
                 </HStack>
