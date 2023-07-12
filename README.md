@@ -30,4 +30,4 @@ Effortlessly track all your special occasions, gift ideas, and expenses. It's a 
 
 ## How to Use
 Go to [Giftlax](https://giftlax.vercel.app/) and sign up.
-**For more:** If you're curious and want to dig deeper into the project, you can check out the blog post (coming soon) at my [blog](https://probablyalexzhu.github.io/blog/tutorial-learning-full-stack-project/).
+**For more:** If you're curious and want to dig deeper into the project, you can check out the blog post at my [blog](https://probablyalexzhu.github.io/blog/tutorial-learning-full-stack-project/).
